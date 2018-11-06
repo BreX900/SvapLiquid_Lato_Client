@@ -22,7 +22,7 @@ public class Help {
     public static void showHelp(final AppCompatActivity activity, final AccountController accountController) {
         new AlertDialog.Builder(activity).setPositiveButton("OK", null).setTitle("INFORMAZIONI").setMessage("I prodotti che vengono offerti sono di alta qualità, ad esempio le basi sono con certificazione farmaceutica,\n" +
                 "In caso si tolga il tappo della boccetta o perchè si è premuto troppo o perchè il tappo aveva il buco un po' chiuso non siamo responsabili dei danni causati o della pardita di liquido in alun modo.\n" +
-                "BUONA GIORANATA").setNeutralButton("Admin", new DialogInterface.OnClickListener() {
+                "BUONA GIORANATA\n"+"APP. Versione: "+activity.getString(R.string.app_versione)).setNeutralButton("Admin", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 LayoutInflater inflater = activity.getLayoutInflater();
