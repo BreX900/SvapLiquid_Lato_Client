@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">SvapLiquid</string>
+    <string name="euro">€</string>
+
+    <string-array name="composizione_array">
+        <item>40/60</item>
+        <item>45/55</item>
+        <item>50/50</item>
+        <item>55/45</item>
+        <item>60/40</item>
+        <item>65/35</item>
+        <item>70/30</item>
+        <item>75/25</item>
+        <item>80/20</item>
+        <item>85/15</item>
+        <item>90/10</item>
+    </string-array>
+
+</resources>

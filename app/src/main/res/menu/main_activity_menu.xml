@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Menu"
+        android:id="@+id/menu_title1">
+        <menu>
+            <item
+                android:id="@+id/menu_item1.0"
+                android:title="Tutti i Liquidi"
+                android:icon="@drawable/infinite"/>
+            <item
+                android:id="@+id/menu_item1.1"
+                android:title="Ricerca"
+                android:icon="@drawable/search"/>
+            <item
+                android:id="@+id/menu_item1.2"
+                android:title="Carello"
+                android:icon="@drawable/cart"/>
+        </menu>
+    </item>
+
+    <item android:title="Account"
+        android:id="@+id/menu_title2">
+        <menu>
+            <item
+                android:id="@+id/menu_item2.1"
+                android:title="Cambia Account"
+                android:icon="@drawable/logout_variant"/>
+            <item
+                android:id="@+id/menu_item2.2"
+                android:title="Informazioni"
+                android:icon="@drawable/help"/>
+        </menu>
+    </item>
+
+</menu>

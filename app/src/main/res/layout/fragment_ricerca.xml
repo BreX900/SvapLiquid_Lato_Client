@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_fragmentSubMain"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            android:layout_alignParentTop="true" />
+    </android.support.design.widget.AppBarLayout>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Campo vuoto troverà tutti i risultati."
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:id="@+id/textViewRicercaCategoria"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ricerca per Categoria:" />
+
+        <EditText
+            android:id="@+id/editTextRicercaCategoria"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:freezesText="false"
+            android:hint="Any"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/textViewRicercaProduttore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ricerca Per Produttore:" />
+
+        <EditText
+            android:id="@+id/editTextRicercaProduttore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:freezesText="false"
+            android:hint="Any"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/textViewRicercaLinea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ricerca Per Linea:" />
+
+        <EditText
+            android:id="@+id/editTextRicercaLinea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:freezesText="false"
+            android:hint="Any"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/textViewSearchAroma"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ricerca Per Liquido:" />
+
+        <EditText
+            android:id="@+id/editTextSearchLiquido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:freezesText="false"
+            android:hint="Any"
+            android:inputType="textPersonName" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_fragmentSubMain_reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Reset" />
+
+    <Button
+        android:id="@+id/searchProduttore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:text="Search" />
+</RelativeLayout>
+    </LinearLayout>

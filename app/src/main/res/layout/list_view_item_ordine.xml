@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relativeLayout_ListViewItemOrdine_top">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true">
+
+            <TextView
+                android:id="@+id/textView_ListViewItemOrdine_idOrdine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="id"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView_ListViewItemOrdine_punto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/textView_ListViewItemOrdine_idOrdine"
+                android:text="-"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView_ListViewItemOrdine_nomeOrdine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/textView_ListViewItemOrdine_punto"
+                android:text="Nome Ordine"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView_ListViewItemOrdine_prezzoCalcolato"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Prezzo Calcolato" />
+            <TextView
+                android:id="@+id/textView_ListViewItemOrdine_euroPrezzoCalcolato"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/euro" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout_ListViewItemOrdine_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/relativeLayout_ListViewItemOrdine_top">
+
+        <TextView
+            android:id="@+id/textView_ListViewItemOrdine_stato"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="stato" />
+
+        <TextView
+            android:id="@+id/textView_ListViewItemOrdine_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Date" />
+
+        <LinearLayout
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView_ListViewItemOrdine_prezzoStimato"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Prezzo Calcolato" />
+            <TextView
+                android:id="@+id/textView_ListViewItemOrdine_euroPrezzoStimato"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/euro" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+
+
+
+</RelativeLayout>

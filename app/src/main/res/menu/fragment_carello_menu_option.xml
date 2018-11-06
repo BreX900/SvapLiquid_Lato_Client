@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/menuOption1_fragmentCarello"
+        android:orderInCategory="100"
+        android:title="Svuota Carello"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/menuOption2_fragmentCarello"
+        android:orderInCategory="100"
+        android:title="Ordina"
+        android:icon="@drawable/share_variant"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/menuOption3_fragmentCarello"
+        android:orderInCategory="100"
+        android:title="Sconti"
+        android:icon="@drawable/sale"
+        app:showAsAction="always"/>
+
+</menu>
