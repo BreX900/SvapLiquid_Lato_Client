@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,9 +32,9 @@ import java.util.HashMap;
  * A {@link android.support.v4.app.FragmentPagerAdapter} that returns a fragment corresponding to
  * one of the sections/tabs/pages.
  */
-class SectionsPagerAdapter extends FragmentPagerAdapter {
-    static TipoTiri tipoTiri;
-    static ValoriRicerca valori;
+class SectionsPagerAdapter extends FragmentStatePagerAdapter {
+    TipoTiri tipoTiri;
+    ValoriRicerca valori;
 
     public SectionsPagerAdapter(FragmentManager fragmentManager, TipoTiri tipoTiri, ValoriRicerca valori) {
         super(fragmentManager);
@@ -50,6 +51,7 @@ class SectionsPagerAdapter extends FragmentPagerAdapter {
     }
     @Override
     public CharSequence getPageTitle(int position) {
+        Log.i(ILog.LOG_TAG, "SectionsPagerAdapter" + " getPageTitle: "+position);
         if (tipoTiri.isEmpty())
             return "NESSUN RISULTATO!";
         return tipoTiri.getRecordByPosition(position).getNome();
@@ -62,12 +64,13 @@ class SectionsPagerAdapter extends FragmentPagerAdapter {
         return tipoTiri.getNumberRecords();
     }
 
-    @Override
+
     public long getItemId(int position) {
+        Log.i(ILog.LOG_TAG, "SectionsPagerAdapter" + " getItemId: "+position);
         return this.tipoTiri.getRecordByPosition(position).getId();
     }
 
-
+    static ArrayMap<Integer, View> views = new ArrayMap<>();
 
     /**
      * A placeholder fragment containing a simple view.
@@ -112,9 +115,10 @@ class SectionsPagerAdapter extends FragmentPagerAdapter {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             Log.i(ILog.LOG_TAG, "SectionsPagerAdapter.PlaceholderFragment" + "onCreateView: ");
-            if (this.rootView == null) {
+            this.idTipoTiro = this.getArguments().getInt(ARG_SECTION_NUMBER);
+            if (! views.containsKey(this.idTipoTiro)) {
                 this.rootView = inflater.inflate(R.layout.fragment_liquid_page, container, false);
-                this.idTipoTiro = this.getArguments().getInt(ARG_SECTION_NUMBER);
+
                 ValoriRicerca valori = (ValoriRicerca) this.getArguments().getSerializable(ARG_VALUE);
                 Log.i(ILog.LOG_TAG, "SectionsPagerAdapter.PlaceholderFragment" + "onCreateView: " + this.idTipoTiro);
                 this.expandableListView = (ExpandableListView) rootView.findViewById(R.id.fragmentLiquidPage_ExpandableListView);
@@ -131,8 +135,9 @@ class SectionsPagerAdapter extends FragmentPagerAdapter {
                 for (int i = 0; i < this.expandableListAdapter.getGroupCount(); i++) {
                     this.expandableListView.expandGroup(i);
                 }
+                views.put(this.idTipoTiro, this.rootView);
             }
-            return rootView;
+            return views.get(this.idTipoTiro);
         }
 
         @Override
@@ -140,6 +145,7 @@ class SectionsPagerAdapter extends FragmentPagerAdapter {
             return null;
         }
     }
+
 
     /*ArrayList<Fragment> listFragment = new ArrayList<>();
     //static final String TAG = "SectionsPagerAdapter - ";

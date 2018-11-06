@@ -64,7 +64,7 @@ public class AccountController extends RecordController<AccountRecord, AccountRe
                 .setPositiveButton("CREA ACCOUNT", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        String nameSurname = editText_name.getText().toString()+" "+editText_surname.getText().toString();
+                        String nameSurname = editText_name.getText().toString().trim()+" "+editText_surname.getText().toString().trim();
                         Log.i(ILog.LOG_TAG, SubMainF.TAG + "onOptionsItemSelected: " + nameSurname);
                         if (!editText_name.getText().toString().isEmpty() && !editText_surname.getText().toString().isEmpty()) {
                             notifyResult.notifyResult(AccountsController.create(database, new AccountData(nameSurname)));

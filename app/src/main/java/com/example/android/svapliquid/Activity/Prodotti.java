@@ -20,14 +20,14 @@ import java.util.ArrayList;
 public class Prodotti extends ArrayList<Prodotto> implements List<Prodotto> {
     public static final String TAG = "ProdottiData - ";
     public void save(String fileName) throws IOException {
-        File outFile = new File(Utility.directory+fileName);
+        File outFile = new File(convertNameToNameFile(fileName));
         ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(outFile));
         os.writeObject(this);
         os.close();
     }
     public static Prodotti load(String fileName) throws IOException, ClassNotFoundException{
-        Log.i(ILog.LOG_TAG, MainActivity.TAG+ "file: "+fileName);
-        FileInputStream fis = new FileInputStream(Utility.directory+fileName);
+        Log.i(ILog.LOG_TAG, MainActivity.TAG+ "file: "+fileName+".svf");
+        FileInputStream fis = new FileInputStream(convertNameToNameFile(fileName));
         ObjectInputStream is = new ObjectInputStream(fis);
         Prodotti prodotti = (Prodotti) is.readObject();
         is.close();
@@ -58,8 +58,11 @@ public class Prodotti extends ArrayList<Prodotto> implements List<Prodotto> {
         }
         return 0;
     }
+    private static String convertNameToNameFile(String name) {
+        return Utility.directory+name+".svf";
+    }
     public static boolean removeFile(String nameFile) {
-        File file = new File(Utility.directory+nameFile);
+        File file = new File(convertNameToNameFile(nameFile));
         return file.delete();
     }
 

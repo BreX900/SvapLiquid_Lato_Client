@@ -56,19 +56,19 @@ public class ResultLiquidF extends NavigationFragmentWithActionBar<MainActivity>
                 valoriRicerca = new ValoriRicerca();
                 Log.i(ILog.LOG_TAG, TAG + "Creazione view: e");
             }
-            rr = new RisultatiRicerca();
-            rr.ricercaTutto(valoriRicerca);
+            this.rr = new RisultatiRicerca();
+            this.rr.ricercaTutto(valoriRicerca);
 
             // Create the adapter that will return a fragment for each of the three
             // primary sections of the activity.
-            mSectionsPagerAdapter = new SectionsPagerAdapter(this.activity.getSupportFragmentManager(), rr.getTipoTiri(), valoriRicerca);
+            this.mSectionsPagerAdapter = new SectionsPagerAdapter(this.activity.getSupportFragmentManager(), this.rr.getTipoTiri(), valoriRicerca);
 
             // Set up the ViewPager with the sections adapter.
-            mViewPager = (ViewPager) this.view.findViewById(R.id.fragmentLiquid_ViewPager);
-            mViewPager.setAdapter(mSectionsPagerAdapter);
+            this.mViewPager = (ViewPager) this.view.findViewById(R.id.fragmentLiquid_ViewPager);
+            this.mViewPager.setAdapter(this.mSectionsPagerAdapter);
 
             TabLayout tabLayout = (TabLayout) this.view.findViewById(R.id.fragmentLiquid_Tab);
-            tabLayout.setupWithViewPager(mViewPager);
+            tabLayout.setupWithViewPager(this.mViewPager);
         }
 
         return view;

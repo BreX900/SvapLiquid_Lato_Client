@@ -27,7 +27,7 @@ public class FragmentBackManager {
     private DrawerLayout draweMenu;
     private final NavigationActivity navigationActivity;
     private final FragmentManager fragmentManager;
-    private ArrayList<NavigationFragment> listFragment = new ArrayList<>(3);
+    private ArrayList<NavigationFragment> listFragment = new ArrayList<>(4);
     private NavigationFragment fragment;
 
     public FragmentBackManager(NavigationActivity navigationActivity, DrawerLayout drawerLayout) {
@@ -66,7 +66,7 @@ public class FragmentBackManager {
             fragmentManager.popBackStack();
             navigationFragment.setRetainInstance(true);
             this.valueBack.setHome();
-            listFragment = new ArrayList<>(3);
+            listFragment = new ArrayList<>(4);
         }
         else {
             fragmentTransaction.addToBackStack(tagFragment);
