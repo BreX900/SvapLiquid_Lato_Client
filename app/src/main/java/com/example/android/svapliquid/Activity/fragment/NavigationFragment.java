@@ -22,8 +22,6 @@ public abstract class NavigationFragment<A extends NavigationActivity> extends F
     }
     @Override
     public void onAttach(final Activity activity) {
-        Log.i(ILog.LOG_TAG, TAG+"onAttach");
-
         this.activity= (A) activity;
         super.onAttach(activity);
     }
@@ -36,5 +34,4 @@ public abstract class NavigationFragment<A extends NavigationActivity> extends F
         return isHome();
     }
     public boolean isLoad() {return false;}
-
 }

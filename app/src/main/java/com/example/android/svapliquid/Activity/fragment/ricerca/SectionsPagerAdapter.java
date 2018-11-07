@@ -1,13 +1,9 @@
 package com.example.android.svapliquid.Activity.fragment.ricerca;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.util.ArrayMap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +19,6 @@ import com.example.android.svapliquid.Activity.fragment.user.LiquidDescriptionF;
 import com.example.android.svapliquid.Activity.fragment.NavigationFragment;
 import com.example.android.svapliquid.R;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -34,60 +29,33 @@ import java.util.HashMap;
  * A {@link android.support.v4.app.FragmentPagerAdapter} that returns a fragment corresponding to
  * one of the sections/tabs/pages.
  */
-class SectionsPagerAdapter extends FragmentStatePagerAdapter {
+class SectionsPagerAdapter extends FragmentPagerAdapter {
     final static String TAG = "SectionsPagerAdapter";
     TipoTiri tipoTiri;
     ValoriRicerca valori;
+    /**Fragment Manager is Child of main fragment*/
     public SectionsPagerAdapter(FragmentManager fragmentManager, TipoTiri tipoTiri, ValoriRicerca valori) {
         super(fragmentManager);
         this.tipoTiri = tipoTiri;
         this.valori = valori;
-
     }
     @Override
     public Fragment getItem(int position) {
-        Log.i(ILog.LOG_TAG, TAG+ " getItem: "+position);
         if (tipoTiri.isEmpty())
             return new Fragment();
-
         return PlaceholderFragment.newInstance(this.tipoTiri.getRecordByPosition(position).getId(), valori);
     }
     @Override
     public CharSequence getPageTitle(int position) {
-        Log.i(ILog.LOG_TAG, TAG+ ".getPageTitle: "+position);
         if (tipoTiri.isEmpty())
             return "NESSUN RISULTATO!";
         return tipoTiri.getRecordByPosition(position).getNome();
     }
-
-    public long getItemId(int paramInt) {
-        Log.i(ILog.LOG_TAG, TAG+ ".getItemId: "+paramInt);
-        return paramInt;
-    }
-
     @Override
     public int getCount() {
-        Log.i(ILog.LOG_TAG, TAG+ ".getCount: "+tipoTiri.getNumberRecords());
         if (tipoTiri.isEmpty())
             return 1;
         return tipoTiri.getNumberRecords();
-    }
-
-    @Override
-    public int getItemPosition(@NonNull Object item) {
-        Log.i(ILog.LOG_TAG, TAG+ ".getItemPosition: ");
-        PlaceholderFragment fragment = (PlaceholderFragment)item;
-        int result = -1;
-        for (int i=0; i<this.tipoTiri.getNumberRecords(); i++) {
-            if (this.tipoTiri.getRecordByPosition(i).getId() == fragment.idTipoTiro)
-                result = i;
-        }
-
-        if (result >= 0) {
-            return result;
-        } else {
-            return POSITION_NONE;
-        }
     }
 
 
@@ -100,8 +68,11 @@ class SectionsPagerAdapter extends FragmentStatePagerAdapter {
         private static final String ARG_SECTION_NUMBER = "section_number";
         private static final String ARG_VALUE = "value";
 
-        public PlaceholderFragment () {
+        public PlaceholderFragment () {}
 
+        @Override
+        public String getTagF() {
+            return null;
         }
         //int idTipoTiro = this.getArguments().getInt(ARG_SECTION_NUMBER);
 
@@ -115,44 +86,28 @@ class SectionsPagerAdapter extends FragmentStatePagerAdapter {
             //fragment.setArguments(args);
             return fragment;
         }
-
-        @Override
-        public void onAttach(Activity activity) {
-            Log.i(ILog.LOG_TAG, TAG+ "onAttach: ");
-            super.onAttach(activity);
-        }
-
-        @Override
-        public String getTagF() {
-            return null;
-        }
-
         View rootView;
         int idTipoTiro = -1;
-
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            Log.i(ILog.LOG_TAG, "SectionsPagerAdapter.PlaceholderFragment" + "onCreateView: ");
-            if (rootView == null) {
-                this.idTipoTiro = this.getArguments().getInt(ARG_SECTION_NUMBER);
-                rootView = inflater.inflate(R.layout.fragment_liquid_page, container, false);
-                ValoriRicerca valori = (ValoriRicerca) this.getArguments().getSerializable(ARG_VALUE);
-                Log.i(ILog.LOG_TAG, "SectionsPagerAdapter.PlaceholderFragment" + "onCreateView: " + this.idTipoTiro);
-                this.expandableListView = (ExpandableListView) rootView.findViewById(R.id.fragmentLiquidPage_ExpandableListView);
-                this.expandableListAdapter = new ExpandableListAdapter(this.getContext(), this.idTipoTiro, valori);
-                this.expandableListView.setAdapter(this.expandableListAdapter);
-                this.expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-                    @Override
-                    public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                        Log.i(ILog.LOG_TAG, TAG + "onChildClick");
-                        int idLiquido = (int) expandableListAdapter.getChildId(groupPosition, childPosition);
-                        activity.onFragmentOpenedToBackStack(LiquidDescriptionF.getInstance(idLiquido));
-                        return true;
-                    }
-                });
-                //for (int i = 0; i < this.expandableListAdapter.getGroupCount(); i++) {
-                //    this.expandableListView.expandGroup(i);
-                //}
+            this.idTipoTiro = this.getArguments().getInt(ARG_SECTION_NUMBER);
+            rootView = inflater.inflate(R.layout.fragment_liquid_page, container, false);
+            ValoriRicerca valori = (ValoriRicerca) this.getArguments().getSerializable(ARG_VALUE);
+            Log.i(ILog.LOG_TAG, "SectionsPagerAdapter.PlaceholderFragment" + "onCreateView: " + this.idTipoTiro);
+            this.expandableListView = (ExpandableListView) rootView.findViewById(R.id.fragmentLiquidPage_ExpandableListView);
+            this.expandableListAdapter = new ExpandableListAdapter(this.getContext(), this.idTipoTiro, valori);
+            this.expandableListView.setAdapter(this.expandableListAdapter);
+            this.expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+                @Override
+                public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                    Log.i(ILog.LOG_TAG, TAG + "onChildClick");
+                    int idLiquido = (int) expandableListAdapter.getChildId(groupPosition, childPosition);
+                    activity.onFragmentOpenedToBackStack(LiquidDescriptionF.getInstance(idLiquido));
+                    return true;
+                }
+            });
+            for (int i = 0; i < this.expandableListAdapter.getGroupCount(); i++) {
+                this.expandableListView.expandGroup(i);
             }
             return rootView;
         }

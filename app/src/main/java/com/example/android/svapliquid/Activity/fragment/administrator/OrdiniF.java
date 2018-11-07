@@ -43,27 +43,29 @@ import org.jetbrains.annotations.NotNull;
 public class OrdiniF extends NavigationFragmentWithActionBar<MainActivity> {
     public static final String TAG = "OrdiniF - ";
     OrdiniUIAdapter ordiniAdapter;
-
     private OrdiniController ordiniController;
     private MenuManager menuManager;
     QueryString defaultQuery;
 
+    View rootView;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.defaultQuery = new QueryString().addSelect(OrdineKey.NOME_TABELLA+".*").addSelect("SUM("+ProdottoKey.PREZZO+") AS "+OrdineController.KEY_PREZZO_CALCOLATO)
-                .addFrom(OrdineKey.NOME_TABELLA).addFrom(ProdottoKey.NOME_TABELLA)
-                .addWhereAnd(OrdineKey.ID_ACCOUNT+"="+activity.account.getRecord().getId()).addWhereAnd(OrdineKey.NOME_TABELLA+"."+OrdineKey.ID+"="+ProdottoKey.NOME_TABELLA+"."+ProdottoKey.ID_ORDINE)
-                .addGroup(OrdineKey.NOME_TABELLA+"."+ProdottoKey.ID_ORDINE).addOrderDesc(OrdineKey.DATA);
+
     }
 
     @Override
     public View createView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_ordini, container, false);
+        rootView = inflater.inflate(R.layout.fragment_ordini, container, false);
         Log.i(ILog.LOG_TAG, TAG + "OnCreateView: ");
-
+        //Questa stringa era in onCreate
+        this.defaultQuery = new QueryString().addSelect(OrdineKey.NOME_TABELLA + ".*").addSelect("SUM(" + ProdottoKey.PREZZO + ") AS " + OrdineController.KEY_PREZZO_CALCOLATO)
+                .addFrom(OrdineKey.NOME_TABELLA).addFrom(ProdottoKey.NOME_TABELLA)
+                .addWhereAnd(OrdineKey.ID_ACCOUNT + "=" + activity.account.getRecord().getId()).addWhereAnd(OrdineKey.NOME_TABELLA + "." + OrdineKey.ID + "=" + ProdottoKey.NOME_TABELLA + "." + ProdottoKey.ID_ORDINE)
+                .addGroup(OrdineKey.NOME_TABELLA + "." + ProdottoKey.ID_ORDINE).addOrderDesc(OrdineKey.DATA);
         this.ordiniController = new OrdiniController(DB.getAccountDatabase(), defaultQuery);
-        ListView listView = (ListView) view.findViewById(R.id.listView_fragmentOrdini);
+        ListView listView = (ListView) rootView.findViewById(R.id.listView_fragmentOrdini);
         ordiniAdapter = new OrdiniUIAdapter(listView, ordiniController, activity);
         RecordControllers.ControllerGuiController.addGui(OrdineKey.NOME_TABELLA, ordiniAdapter);
         ordiniAdapter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -73,8 +75,7 @@ public class OrdiniF extends NavigationFragmentWithActionBar<MainActivity> {
             }
         });
         listView.setAdapter(ordiniAdapter);
-
-        return view;
+        return rootView;
     }
 
     public static OrdiniF getInstance() {
@@ -92,7 +93,7 @@ public class OrdiniF extends NavigationFragmentWithActionBar<MainActivity> {
     }
 
     @Override
-    public void onCreateOptionsMenu(final Menu menu, final MenuInflater inflater, ActionBar actionBar) {
+    public void onCreateOptionsMenu(final Menu menu, final MenuInflater inflater, final ActionBar actionBar) {
         this.menuManager = new MenuManager(menu, inflater, new MenuManager.MenuLittleManager(R.menu.fragment_ordini_menu_option, new MenuManager.OnOptionsItemSelectedListener() {
             @Override
             public boolean onOptionsItemSelected(MenuItem item) {
@@ -119,6 +120,9 @@ public class OrdiniF extends NavigationFragmentWithActionBar<MainActivity> {
                         ordiniController.delete(ordiniAdapter.getItemsSelected());
                         RecordControllers.ControllerGuiController.refresh(OrdineKey.NOME_TABELLA);
                         break;
+                    case R.id.modify:
+                        ordiniController.update(ordiniAdapter.getItemsSelected(), activity, activity.account.getRecord().getId());
+                       break;
                 }
                 return true;
             }

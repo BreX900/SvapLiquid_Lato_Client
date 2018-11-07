@@ -34,54 +34,42 @@ public class ResultLiquidF extends NavigationFragmentWithActionBar<MainActivity>
     private ViewPager mViewPager;
     RisultatiRicerca rr;
     static int i=0;
-    View view = null;
     @Override
     public View createView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         Log.i(ILog.LOG_TAG, TAG+ "createView");
-        if (null == null) {
-            this.view = inflater.inflate(R.layout.fragment_liquid, container, false);
-
-            //Log.i(ILog.LOG_TAG, TAG + "OnCreateView"+mainActivity.produttore);
-            Bundle bundle = getArguments();
-            ValoriRicerca valoriRicerca;
-            if (bundle != null) {
-                if (bundle.containsKey(RICERCA_VALORI)) {
-                    valoriRicerca = (ValoriRicerca) bundle.getSerializable(RICERCA_VALORI);
-                    Log.i(ILog.LOG_TAG, TAG + "Creazione view: ii");
-                } else {
-                    valoriRicerca = new ValoriRicerca();
-                    Log.i(ILog.LOG_TAG, TAG + "Creazione view: ie");
-                }
+        View rootView = inflater.inflate(R.layout.fragment_liquid, container, false);
+        //Log.i(ILog.LOG_TAG, TAG + "OnCreateView"+mainActivity.produttore);
+        Bundle bundle = getArguments();
+        ValoriRicerca valoriRicerca;
+        if (bundle != null) {
+            if (bundle.containsKey(RICERCA_VALORI)) {
+                valoriRicerca = (ValoriRicerca) bundle.getSerializable(RICERCA_VALORI);
+                Log.i(ILog.LOG_TAG, TAG + "Creazione view: ii");
             } else {
                 valoriRicerca = new ValoriRicerca();
-                Log.i(ILog.LOG_TAG, TAG + "Creazione view: e");
+                Log.i(ILog.LOG_TAG, TAG + "Creazione view: ie");
             }
-            this.rr = new RisultatiRicerca();
-            this.rr.ricercaTutto(valoriRicerca);
-
-            // Create the adapter that will return a fragment for each of the three
-            // primary sections of the activity.
-            this.mSectionsPagerAdapter = new SectionsPagerAdapter(this.activity.getSupportFragmentManager(), this.rr.getTipoTiri(), valoriRicerca);
-            // Set up the ViewPager with the sections adapter.
-            this.mViewPager = this.view.findViewById(R.id.fragmentLiquid_ViewPager);
-            this.mViewPager.setAdapter(this.mSectionsPagerAdapter);
-
-            TabLayout tabLayout = this.view.findViewById(R.id.fragmentLiquid_Tab);
-            tabLayout.setupWithViewPager(this.mViewPager);
+        } else {
+            valoriRicerca = new ValoriRicerca();
+            Log.i(ILog.LOG_TAG, TAG + "Creazione view: e");
         }
+        this.rr = new RisultatiRicerca();
+        this.rr.ricercaTutto(valoriRicerca);
 
-        return view;
-    }
+        // Create the adapter that will return a fragment for each of the three
+        // primary sections of the activity.
+        this.mSectionsPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager(), this.rr.getTipoTiri(), valoriRicerca);
+        // Set up the ViewPager with the sections adapter.
+        this.mViewPager = rootView.findViewById(R.id.fragmentLiquid_ViewPager);
+        this.mViewPager.setAdapter(this.mSectionsPagerAdapter);
 
-    @Override
-    public void onResume() {
-        this.mSectionsPagerAdapter.notifyDataSetChanged();
-        super.onResume();
+        TabLayout tabLayout = rootView.findViewById(R.id.fragmentLiquid_Tab);
+        tabLayout.setupWithViewPager(this.mViewPager);
+        return rootView;
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater, ActionBar actionBar) {
-        Log.i(ILog.LOG_TAG, TAG+ "onCreateOptionsMenu");
         actionBar.setTitle("Risultato Ricerca");
         actionBar.setSubtitle("Tipologie di Tiro: ");
     }

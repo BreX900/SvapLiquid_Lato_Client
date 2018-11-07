@@ -1,9 +1,23 @@
 package com.example.android.svapliquid.Activity.Ordin.controller.ordine;
 
 import android.content.ContentValues;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.util.ArrayMap;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.android.svapliquid.Activity.ILog;
 import com.example.android.svapliquid.Activity.Ordin.UI.recordUI.OrdineRecordUI;
+import com.example.android.svapliquid.Activity.Ordin.controller.DateController;
 import com.example.android.svapliquid.Activity.Ordin.controller.defaultController.RecordControllers;
+import com.example.android.svapliquid.Activity.Ordin.controller.prodotto.ProdottiControllers;
 import com.example.android.svapliquid.Activity.Ordin.data.OrdineData;
 import com.example.android.svapliquid.Activity.Ordin.data.PrezzoData;
 import com.example.android.svapliquid.Activity.Ordin.index.OrdineKey;
@@ -12,6 +26,10 @@ import com.example.android.svapliquid.Activity.Ordin.record.OrdineRecord;
 import com.example.android.svapliquid.Activity.databases.CursorS;
 import com.example.android.svapliquid.Activity.databases.DB;
 import com.example.android.svapliquid.Activity.databases.svapliquid_db.tabel_record.Query.QueryString;
+import com.example.android.svapliquid.R;
+
+import java.text.ParseException;
+import java.util.ArrayList;
 
 /**
  * Created by Andorid on 11/11/2017.
@@ -46,6 +64,37 @@ public class OrdiniController extends RecordControllers<OrdineRecord, OrdineReco
         database.insert(OrdineKey.NOME_TABELLA, null, initialValues);
         return DB.getUltimoIdInserito(database.getDatabase());
     }
+    public boolean update(ArrayList<OrdineController> list, final AppCompatActivity activity, final int idAccount) {
+        if (list.size() == 1) {
+            OrdineController ordineController = list.get(0);
+            OrdineRecord ordineRecord = ordineController.getRecord();
+            final LayoutInflater inflater = activity.getLayoutInflater();
+            final View view = inflater.inflate(R.layout.alert_dialog_add_ordine, null);
+            final EditText editText_nome = view.findViewById(R.id.editText_alertDialogAddOrdine_nomeOrdine);
+            editText_nome.setText(ordineRecord.getNome());
+            final EditText editText_prezzo = view.findViewById(R.id.editText_alertDialogAddOrdine_prezzo);
+            editText_prezzo.setText(ordineRecord.getPrezzo().getPrezzo()+"");
+            final EditText editText_stato = (EditText) view.findViewById(R.id.editText_alertDialogAddOrdine_stato);
+            editText_stato.setText(ordineRecord.getStato());
+            final EditText editText_informazioni = (EditText) view.findViewById(R.id.editText_alertDialogAddOrdine_informazioni);
+            editText_informazioni.setText(ordineRecord.getInformazioni());
+            final EditText editText_date = (EditText) view.findViewById(R.id.editText_alertDialogAddOrdine_date);
+            new AlertDialog.Builder(activity).setTitle("Aggiungi all'archivio").setView(view).setPositiveButton("SALVA", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(final DialogInterface dialog, final int which) {
+                    Log.i(ILog.LOG_TAG, "OrdiniController.update.onClick");
+                    update(editText_nome.getText().toString(), editText_informazioni.getText().toString(), new PrezzoData(Double.parseDouble(editText_prezzo.getText().toString())),
+                            editText_stato.getText().toString(), idAccount);
+                    RecordControllers.ControllerGuiController.refresh(OrdineKey.NOME_TABELLA);
+                    Log.i(ILog.LOG_TAG, "OrdiniController.update.onClick2");
+                }
+            }).setNeutralButton("ANNULLA", null).show();
+        } else {
+            Toast.makeText(activity, "Carello vuoto", Toast.LENGTH_LONG).show();
+        }
+        return true;
+    }
+
     private boolean update(String nome, String informazioni, PrezzoData prezzo, String stato, int idAccount) {
         ContentValues initialValues = new ContentValues();
         initialValues.put(OrdineKey.INFORMAZIONI, informazioni);
@@ -53,7 +102,7 @@ public class OrdiniController extends RecordControllers<OrdineRecord, OrdineReco
         initialValues.put(OrdineKey.PREZZO, prezzo.getPrezzo());
         initialValues.put(OrdineKey.STATO, stato);
         initialValues.put(OrdineKey.ID_ACCOUNT, idAccount);
-        getDatabase().insert(OrdineKey.NOME_TABELLA, null, initialValues);
+        getDatabase().update(OrdineKey.NOME_TABELLA, initialValues, );
         return true;
     }
 

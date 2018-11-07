@@ -65,7 +65,9 @@ public class FragmentBackManager {
             else {
                 this.draweMenu.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
             }
-            fragmentManager.popBackStack();
+            for (int i=0; i<listFragment.size(); i++) {
+                fragmentManager.popBackStack();
+            }
             navigationFragment.setRetainInstance(true);
             this.valueBack.setHome();
             listFragment = new ArrayList<>(4);

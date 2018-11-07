@@ -16,7 +16,6 @@ public class OrdineData {
         this.prezzo = prezzo;
         this.stato = stato;
         this.informazioni = informazioni;
-
         this.date = date;
     }
 
