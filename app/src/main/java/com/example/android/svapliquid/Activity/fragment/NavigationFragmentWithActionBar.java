@@ -44,7 +44,7 @@ public abstract class NavigationFragmentWithActionBar<E extends NavigationActivi
 
         if (!this.isLoad()) {
             actionBar.setDisplayHomeAsUpEnabled(true);
-            if (this.isHome()) {
+            if (this.isSubHome()) {
                 actionBar.setHomeAsUpIndicator(R.drawable.menu);
             }
         }

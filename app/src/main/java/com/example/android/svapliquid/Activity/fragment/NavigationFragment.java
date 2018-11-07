@@ -31,6 +31,10 @@ public abstract class NavigationFragment<A extends NavigationActivity> extends F
 
 
     abstract public String getTagF();
-    public boolean isHome() {return false;}
+    public boolean isHome() {return false;} //Identificare fragment secondari di una sotto home
+    public boolean isSubHome() {
+        return isHome();
+    }
     public boolean isLoad() {return false;}
+
 }

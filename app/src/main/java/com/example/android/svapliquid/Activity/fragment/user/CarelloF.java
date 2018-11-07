@@ -47,6 +47,7 @@ public class CarelloF extends NavigationFragmentWithActionBar<MainActivity> {
 
     @Override
     public View createView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+        Log.i(ILog.LOG_TAG, TAG+ "createView: nf"+getFragmentManager().getBackStackEntryCount());
         View view = inflater.inflate(R.layout.fragment_carello, container, false);
 
         Log.i(ILog.LOG_TAG, TAG + "onCreateView");
@@ -194,7 +195,7 @@ public class CarelloF extends NavigationFragmentWithActionBar<MainActivity> {
     }
 
     @Override
-    public boolean isHome() {
+    public boolean isSubHome() {
         return true;
     }
 }

@@ -85,8 +85,9 @@ public class OrdiniF extends NavigationFragmentWithActionBar<MainActivity> {
     public String getTagF() {
         return TAG;
     }
+
     @Override
-    public boolean isHome() {
+    public boolean isSubHome() {
         return true;
     }
 

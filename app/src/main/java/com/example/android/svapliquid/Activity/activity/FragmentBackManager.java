@@ -42,6 +42,7 @@ public class FragmentBackManager {
 
 
     public void onFragmentOpenedToBackStack(NavigationFragment frag) {
+        boolean isAddBackStack = true;
         final String tagFragment = frag.getTagF();
         Log.i(ILog.LOG_TAG, TAG + "onFragmentOpenedToBackStack: "+tagFragment);
         Fragment fragment = fragmentManager.findFragmentByTag(tagFragment);
@@ -57,6 +58,7 @@ public class FragmentBackManager {
 
         FragmentTransaction fragmentTransaction = this.fragmentManager.beginTransaction().replace(R.id.container_activity, navigationFragment, tagFragment);
         if (navigationFragment.isHome()) {
+            Log.i(ILog.LOG_TAG, TAG + "onFragmentOpenedToBackStack: isHome");
             if (this.draweMenu != null && navigationFragment.isLoad()) {
                 this.draweMenu.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
             }
@@ -67,17 +69,22 @@ public class FragmentBackManager {
             navigationFragment.setRetainInstance(true);
             this.valueBack.setHome();
             listFragment = new ArrayList<>(4);
-        }
-        else {
-            fragmentTransaction.addToBackStack(tagFragment);
-            this.valueBack.addBack();
+        } else {
+            if ((valueBack.isHome() || (valueBack.isHome() && navigationFragment.isSubHome()) || !navigationFragment.isSubHome())) {    //Aggiungo la subhome se si è in home oppure aggiungo il fragment se non è una home generica
+                fragmentTransaction.addToBackStack(tagFragment);
+                this.valueBack.addBack();
+            } else {    //Rimuovo l'ultimo frgment e aggiungo la subhome nuova
+                fragmentManager.popBackStack();
+                listFragment.remove(listFragment.size()-1);
+                fragmentTransaction.addToBackStack(tagFragment);
+            }
         }
         fragmentTransaction.commit();
         if (this.draweMenu != null && this.draweMenu.isDrawerOpen(GravityCompat.START)) {
             this.draweMenu.closeDrawer(GravityCompat.START);
         }
         this.fragment = navigationFragment;
-        listFragment.add(navigationFragment);
+        if (isAddBackStack) listFragment.add(navigationFragment);
     }
     /*public void onFragmentOpenedToBackStack(NavigationFragmentWithActionBar frag) {
         onFragmentOpenedToBackStack((NavigationFragment) frag);
@@ -95,6 +102,7 @@ public class FragmentBackManager {
             listFragment.remove((listFragment.size() - 1));
             this.fragment = listFragment.get((listFragment.size() - 1));
         }
+        Log.i(ILog.LOG_TAG, TAG +"isBackPressed: fines");
         return value;
     }
     boolean isBackPressedSimple() {
@@ -136,7 +144,7 @@ public class FragmentBackManager {
     public boolean onOptionsItemSelected(MenuItem item) {
         //Log.i(ILog.LOG_TAG, TAG+ "OptionItemSelected");
         if (item.getItemId() == android.R.id.home) {
-            if (this.fragment.isHome())
+            if (this.fragment.isSubHome())
                 this.draweMenu.openDrawer(GravityCompat.START);
             else
                 this.navigationActivity.onBackPressed();

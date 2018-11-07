@@ -30,15 +30,15 @@ import org.jetbrains.annotations.NotNull;
 public class ResultLiquidF extends NavigationFragmentWithActionBar<MainActivity> implements IBackOn {
     public static final String TAG = "ResultLiquidF - ";
     public static final String RICERCA_VALORI = "ricercaValori";
-    private SectionsPagerAdapter mSectionsPagerAdapter;
+    public SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
     RisultatiRicerca rr;
     static int i=0;
     View view = null;
     @Override
     public View createView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-        Log.i(ILog.LOG_TAG, TAG+ "Creazione view");
-        if (this.view == null) {
+        Log.i(ILog.LOG_TAG, TAG+ "createView");
+        if (null == null) {
             this.view = inflater.inflate(R.layout.fragment_liquid, container, false);
 
             //Log.i(ILog.LOG_TAG, TAG + "OnCreateView"+mainActivity.produttore);
@@ -62,16 +62,21 @@ public class ResultLiquidF extends NavigationFragmentWithActionBar<MainActivity>
             // Create the adapter that will return a fragment for each of the three
             // primary sections of the activity.
             this.mSectionsPagerAdapter = new SectionsPagerAdapter(this.activity.getSupportFragmentManager(), this.rr.getTipoTiri(), valoriRicerca);
-
             // Set up the ViewPager with the sections adapter.
-            this.mViewPager = (ViewPager) this.view.findViewById(R.id.fragmentLiquid_ViewPager);
+            this.mViewPager = this.view.findViewById(R.id.fragmentLiquid_ViewPager);
             this.mViewPager.setAdapter(this.mSectionsPagerAdapter);
 
-            TabLayout tabLayout = (TabLayout) this.view.findViewById(R.id.fragmentLiquid_Tab);
+            TabLayout tabLayout = this.view.findViewById(R.id.fragmentLiquid_Tab);
             tabLayout.setupWithViewPager(this.mViewPager);
         }
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        this.mSectionsPagerAdapter.notifyDataSetChanged();
+        super.onResume();
     }
 
     @Override
@@ -98,4 +103,14 @@ public class ResultLiquidF extends NavigationFragmentWithActionBar<MainActivity>
         return ResultLiquidF.TAG;
     }
 
+    @Override
+    public void onDestroyView() {
+        Log.i(ILog.LOG_TAG, TAG+ "onDestroyView: "+getFragmentManager().getBackStackEntryCount());
+        super.onDestroyView();
+    }
+
+    @Override
+    public boolean isSubHome() {
+        return true;
+    }
 }
