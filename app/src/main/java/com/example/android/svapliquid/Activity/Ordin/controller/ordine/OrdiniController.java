@@ -67,26 +67,26 @@ public class OrdiniController extends RecordControllers<OrdineRecord, OrdineReco
     public boolean update(ArrayList<OrdineController> list, final AppCompatActivity activity, final int idAccount) {
         if (list.size() == 1) {
             OrdineController ordineController = list.get(0);
-            OrdineRecord ordineRecord = ordineController.getRecord();
+            final OrdineRecord ordineRecord = ordineController.getRecord();
             final LayoutInflater inflater = activity.getLayoutInflater();
             final View view = inflater.inflate(R.layout.alert_dialog_add_ordine, null);
             final EditText editText_nome = view.findViewById(R.id.editText_alertDialogAddOrdine_nomeOrdine);
             editText_nome.setText(ordineRecord.getNome());
             final EditText editText_prezzo = view.findViewById(R.id.editText_alertDialogAddOrdine_prezzo);
             editText_prezzo.setText(ordineRecord.getPrezzo().getPrezzo()+"");
-            final EditText editText_stato = (EditText) view.findViewById(R.id.editText_alertDialogAddOrdine_stato);
+            final EditText editText_stato = view.findViewById(R.id.editText_alertDialogAddOrdine_stato);
             editText_stato.setText(ordineRecord.getStato());
-            final EditText editText_informazioni = (EditText) view.findViewById(R.id.editText_alertDialogAddOrdine_informazioni);
+            final EditText editText_informazioni = view.findViewById(R.id.editText_alertDialogAddOrdine_informazioni);
             editText_informazioni.setText(ordineRecord.getInformazioni());
-            final EditText editText_date = (EditText) view.findViewById(R.id.editText_alertDialogAddOrdine_date);
+            final EditText editText_date = view.findViewById(R.id.editText_alertDialogAddOrdine_date);
+            editText_date.setText(ordineRecord.getDate().getDateIt());
+            editText_date.setEnabled(false);
             new AlertDialog.Builder(activity).setTitle("Aggiungi all'archivio").setView(view).setPositiveButton("SALVA", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(final DialogInterface dialog, final int which) {
-                    Log.i(ILog.LOG_TAG, "OrdiniController.update.onClick");
-                    update(editText_nome.getText().toString(), editText_informazioni.getText().toString(), new PrezzoData(Double.parseDouble(editText_prezzo.getText().toString())),
+                    update(ordineRecord.getId(), editText_nome.getText().toString(), editText_informazioni.getText().toString(), new PrezzoData(Double.parseDouble(editText_prezzo.getText().toString())),
                             editText_stato.getText().toString(), idAccount);
                     RecordControllers.ControllerGuiController.refresh(OrdineKey.NOME_TABELLA);
-                    Log.i(ILog.LOG_TAG, "OrdiniController.update.onClick2");
                 }
             }).setNeutralButton("ANNULLA", null).show();
         } else {
@@ -95,14 +95,14 @@ public class OrdiniController extends RecordControllers<OrdineRecord, OrdineReco
         return true;
     }
 
-    private boolean update(String nome, String informazioni, PrezzoData prezzo, String stato, int idAccount) {
+    private boolean update(int idOrdine, String nome, String informazioni, PrezzoData prezzo, String stato, int idAccount) {
         ContentValues initialValues = new ContentValues();
         initialValues.put(OrdineKey.INFORMAZIONI, informazioni);
         initialValues.put(OrdineKey.NOME, nome);
         initialValues.put(OrdineKey.PREZZO, prezzo.getPrezzo());
         initialValues.put(OrdineKey.STATO, stato);
         initialValues.put(OrdineKey.ID_ACCOUNT, idAccount);
-        getDatabase().update(OrdineKey.NOME_TABELLA, initialValues, );
+        getDatabase().update(OrdineKey.NOME_TABELLA, initialValues, "idOrdine="+idOrdine);
         return true;
     }
 
