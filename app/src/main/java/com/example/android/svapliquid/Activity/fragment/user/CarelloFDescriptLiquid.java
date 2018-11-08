@@ -100,7 +100,7 @@ public class CarelloFDescriptLiquid  extends DescriptionLiquidF {
             }
         });
         final Spinner spinner = (Spinner) view.findViewById(R.id.spinner_liquidDescription_idBoccetta);
-        spinner.setAdapter(new SpinBaseAdapter(activity, rr.getBoccette().getIdStrings(rr.getBoccette())));
+        spinner.setAdapter(new SpinBaseAdapter(activity, rr.getBoccette().getIdStrings()));//rr.getBoccette()
         Log.i(ILog.LOG_TAG, TAG +"onCreateView: "+rr.getBoccette().getPositionById(prodotto.getBoccetta().getId()));
         spinner.setSelection(rr.getBoccette().getPositionById(prodotto.getBoccetta().getId()));
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

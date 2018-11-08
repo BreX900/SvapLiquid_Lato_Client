@@ -33,17 +33,7 @@ public class AllLiquidF extends ResultLiquidF {
         actionBar.setTitle("Tutti i Liquidi");
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menuOption1_fragmentAllLiquid:
 
-                break;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-        return true;
-    }
 
     @Override
     public boolean isHome() {

@@ -11,7 +11,7 @@ import java.io.Serializable;
  * Created by Android on 21/07/2017.
  */
 
-public abstract class Record implements Serializable{
+public abstract class Record implements Serializable, OnStringR{
     protected int id = 0;
     public Record(int id) {
         this.id = id;
@@ -52,5 +52,10 @@ public abstract class Record implements Serializable{
 
     public boolean isNullId() {
         return id == 0;
+    }
+
+    @Override
+    public String getString() {
+        return "NotImplement";
     }
 }

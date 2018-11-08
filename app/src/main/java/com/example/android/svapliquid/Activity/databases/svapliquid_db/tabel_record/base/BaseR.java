@@ -33,4 +33,6 @@ public class BaseR extends Record implements Cloneable {
     public double getMgSuMlNicotina() {
         return this.mgSuMlNicotina;
     }
+
+
 }

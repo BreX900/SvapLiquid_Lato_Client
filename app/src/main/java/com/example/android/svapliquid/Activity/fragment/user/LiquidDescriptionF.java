@@ -58,7 +58,7 @@ public class LiquidDescriptionF extends DescriptionLiquidF {
         BaseR baseR = rr.getBasi().getRecordByTipoBase(BasiT.TIPO_BASE_VG);
         BaseR baseNicotinata = rr.getBasi().getBasiConNicotina().getRecordByPosition(0);
         final Spinner spinner = (Spinner) view.findViewById(R.id.spinner_liquidDescription_idBoccetta);
-        spinner.setAdapter(new SpinBaseAdapter(activity, rr.getBoccette().getIdStrings(rr.getBoccette())));
+        spinner.setAdapter(new SpinBaseAdapter(activity, rr.getBoccette().getIdStrings()));//rr.getBoccette()
 
         final Spinner spinnerComposizione = (Spinner) view.findViewById(R.id.spinner_liquidDescription_composizione);
         spinnerComposizione.setSaveEnabled(false);

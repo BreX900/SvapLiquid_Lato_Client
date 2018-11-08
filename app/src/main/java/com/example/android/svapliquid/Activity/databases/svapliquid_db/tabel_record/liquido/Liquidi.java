@@ -29,9 +29,4 @@ public class Liquidi extends Tabella<Liquido> implements OnString{
     public String getNomeTabella() {
         return Liquido.NOME_TABELLA;
     }
-
-    @Override
-    public String getString(int position) {
-        return this.records.get(position).getNome();
-    }
 }

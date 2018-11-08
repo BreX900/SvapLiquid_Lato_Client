@@ -41,7 +41,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         this.valori = valori;
         RisultatiRicerca rr = new RisultatiRicerca();
         rr.ricercaTutto(idTipoTiro, valori);
-        gruppo = rr.getTableCategoria().getIdStrings(rr.getTableCategoria());
+        gruppo = rr.getTableCategoria().getIdStrings();//rr.getTableCategoria()
     }
 
     @Override
@@ -53,7 +53,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         if (!this.partecipanti.containsKey(this.gruppo.get(groupPosition).getId())) {
             RisultatiRicerca ricerca = new RisultatiRicerca();
             ricerca.ricercaTutto(this.idTipoTiro, this.gruppo.get(groupPosition).getId(), valori);
-            this.partecipanti.put(this.gruppo.get(groupPosition).getId(), ricerca.getLiquidi().getIdStrings(ricerca.getLiquidi()));
+            this.partecipanti.put(this.gruppo.get(groupPosition).getId(), ricerca.getLiquidi().getIdStrings());//ricerca.getLiquidi()
             //Log.i(ILog.LOG_TAG, TAG + "getChildrenCount"+ricerca.getLiquidi().getNumberRecords());
         }
 

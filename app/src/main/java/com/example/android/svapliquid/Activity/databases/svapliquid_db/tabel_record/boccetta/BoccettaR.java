@@ -62,4 +62,9 @@ public class BoccettaR extends Record implements Serializable, Cloneable {
     public String getIdentificativo() {
         return this.getNome()+" - "+this.getMl()+"ml";
     }
+
+    @Override
+    public String getString() {
+        return getNome()+": "+getMl()+"ml";
+    }
 }

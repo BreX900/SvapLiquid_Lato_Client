@@ -27,4 +27,9 @@ public class Categoria extends Record {
                 return true;
         return false;
     }
+
+    @Override
+    public String getString() {
+        return getNome();
+    }
 }

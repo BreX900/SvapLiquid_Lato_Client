@@ -31,9 +31,4 @@ public class BoccetteT extends Tabella<BoccettaR> implements OnString {
         }
         return null;
     }
-
-    @Override
-    public String getString(int position) {
-        return this.records.get(position).getNome()+": "+this.records.get(position).getMl()+"ml";
-    }
 }

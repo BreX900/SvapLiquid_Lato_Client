@@ -11,10 +11,10 @@
 
     <item
         android:id="@+id/menuOption2_fragmentCarello"
+        android:icon="@drawable/cart"
         android:orderInCategory="100"
         android:title="Ordina"
-        android:icon="@drawable/share_variant"
-        app:showAsAction="always"/>
+        app:showAsAction="always" />
     <item
         android:id="@+id/menuOption3_fragmentCarello"
         android:orderInCategory="100"

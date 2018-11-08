@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * Created by Android on 21/07/2017.
  */
 
-public abstract class Tabella<E extends Record> implements Serializable{
+public abstract class Tabella<E extends Record> implements Serializable, OnString{
     final static String TAG = "Tabella - ";
     protected ArrayList<E> records = new ArrayList<>();
 
@@ -88,12 +88,18 @@ public abstract class Tabella<E extends Record> implements Serializable{
         return this.records.remove(record);
     }
 
-    public ArrayList<IdString> getIdStrings(OnString string) {
+    public ArrayList<IdString> getIdStrings() {
         ArrayList<IdString> arraylist = new ArrayList<>();
         for (int i=0; i<this.records.size(); i++) {
-            arraylist.add(new IdString(this.records.get(i).getId(), string.getString(i)));
+            E record = this.records.get(i);
+            arraylist.add(new IdString(record.getId(), record.getString()));
         }
         return arraylist;
+    }
+
+    @Override
+    public String getString(int position) {
+        return this.records.get(position).getString();
     }
 
     public int getPositionById(int id) {

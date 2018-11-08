@@ -26,9 +26,4 @@ public class Categorie extends Tabella<Categoria> implements OnString {
     public String getNomeTabella() {
         return NOME_TABELLA;
     }
-
-    @Override
-    public String getString(int position) {
-        return this.records.get(position).getNome();
-    }
 }
