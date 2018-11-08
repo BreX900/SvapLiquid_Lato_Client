@@ -1,5 +1,6 @@
 package com.example.android.svapliquid.Activity.fragment.user;
 
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -23,8 +25,10 @@ import android.widget.TextView;
 
 import com.example.android.svapliquid.Activity.ILog;
 import com.example.android.svapliquid.Activity.OnActionListener;
+import com.example.android.svapliquid.Activity.Ordin.index.OrdineKey;
 import com.example.android.svapliquid.Activity.Prodotto;
 import com.example.android.svapliquid.Activity.TextViewPrezzo;
+import com.example.android.svapliquid.Activity.databases.DB;
 import com.example.android.svapliquid.Activity.databases.svapliquid_db.RisultatiRicerca;
 import com.example.android.svapliquid.Activity.databases.svapliquid_db.tabel_record.base.BaseR;
 import com.example.android.svapliquid.Activity.databases.svapliquid_db.tabel_record.base.BasiT;
@@ -45,6 +49,7 @@ public class LiquidDescriptionF extends DescriptionLiquidF {
     Prodotto prodotto;
     EditText editText;
     TextWatcher textWatcher;
+    Liquido liquido;
 
     @Override
     public View createView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
@@ -94,11 +99,17 @@ public class LiquidDescriptionF extends DescriptionLiquidF {
             }
         }
 
-
-        ((TextView) view.findViewById(R.id.textViewLiquidDescriptionDescrizione)).setText(rr.getLiquidi().getRecordByPosition(0).getDescrione());
+        liquido = rr.getLiquidi().getRecordByPosition(0);
+        String availability = liquido.getNome().split(" ", 2)[0];
+        if (availability.equals("❌")) availability += " DISPONIBILE SOLO SE ORDINATO UNA SETTIMANA PRIMA";
+        else availability += " Disponibile";
+        ((TextView) view.findViewById(R.id.availability)).setText("Disponibilità: "+availability);
+        ((TextView) view.findViewById(R.id.textViewLiquidDescriptionDescrizione)).setText(liquido.getDescrione());
         ((TextView) view.findViewById(R.id.TextView_LiquidDescription_TipologiaTiro)).setText("TIPOLOGIA DI TIRO: "+rr.getTipoTiri().getRecordByPosition(0).getNome());
         ((TextView) view.findViewById(R.id.TextView_LiquidDescription_Produttore)).setText("PRODUTTORE: "+rr.getProduttori().getRecordByPosition(0).getNome());
         ((TextView) view.findViewById(R.id.textView_LiquidDescription_Linea)).setText("LINEA:  "+rr.getLinee().getRecordByPosition(0).getNome());
+
+
 
         final TextViewPrezzo textViewPrezzo = new TextViewPrezzo((TextView) view.findViewById(R.id.textView_LiquidDescription_prezzo));
 
@@ -211,5 +222,31 @@ public class LiquidDescriptionF extends DescriptionLiquidF {
         editText.setText("");
         editText.setFreezesText(false);
         super.onDestroyView();
+    }
+
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        Log.i(ILog.LOG_TAG, TAG + "OptionMenu Select");
+        switch (item.getItemId()) {
+            case R.id.availability:
+                new AlertDialog.Builder(activity).setTitle("INFORMAZIONI").setMessage("Cambia la disponibilità?\nServono diritti amministratore")
+                        .setPositiveButton("✔️", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                changeAvailability("✔️"); }
+                        }).setNegativeButton("❌", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                changeAvailability("❌"); }})
+                .setNeutralButton("NO", null).show();
+                break;
+                default:
+                    return super.onOptionsItemSelected(item);
+        }
+        return true;
+    }
+    private void changeAvailability(String s) {
+        ContentValues initialValues = new ContentValues();
+        initialValues.put(Liquido.KEY_NOME, s+" "+liquido.getNome().split(" ", 2)[1]);
+        DB.getLiquidDatabase().update(Liquido.NOME_TABELLA, initialValues, Liquido.KEY_RIGAID+"="+liquido.getId());
     }
 }

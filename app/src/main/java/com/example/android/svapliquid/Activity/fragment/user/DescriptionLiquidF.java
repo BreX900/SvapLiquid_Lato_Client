@@ -26,7 +26,8 @@ public abstract class DescriptionLiquidF extends NavigationFragmentWithActionBar
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater, ActionBar actionBar) {
-        inflater.inflate(R.menu.prodotto_menu_option, menu);
+        if (activity.isAdministrator()) inflater.inflate(R.menu.prodotto_menu_option_ad, menu);
+        else inflater.inflate(R.menu.prodotto_menu_option, menu);
     }
     public boolean onOptionsItemSelected(final MenuItem item) {
         Log.i(ILog.LOG_TAG, TAG + "OptionMenu Select");

@@ -151,18 +151,18 @@ public class ResultLiquidF extends NavigationFragmentWithActionBar<MainActivity>
             RisultatiRicerca rr = new RisultatiRicerca();
             rr.ricercaTutto(tipoTiro.getId(), this.valoriRicerca);
             ArrayList<IdString> gruppi = rr.getTableCategoria().getIdStrings();//rr.getTableCategoria()
-            message += "---------- *"+tipoTiro.getNome()+"* ----------\n";
+            message += "\n----------------------- *"+tipoTiro.getNome()+"* -----------------------\n";
             for (int g=0; g<gruppi.size(); g++) {
                 IdString gruppo = gruppi.get(g);
-                message += "----- _"+gruppo.getString()+"_ -----\n";
+                message += "_*"+gruppo.getString()+"*_\n";
                 RisultatiRicerca rr2 = new RisultatiRicerca();
                 rr2.ricercaTutto(tipoTiro.getId(), gruppo.getId(), this.valoriRicerca);
                 ArrayList<IdString> liquidi = rr2.getLiquidi().getIdStrings();//rr2.getLiquidi()
                 for (int l=0; l<liquidi.size(); l++) {
-                   message += "- "+liquidi.get(l).getString()+"\n";
+                   message += liquidi.get(l).getString()+"\n";
                 }
             }
         }
-        return message;
+        return message+"\n✔️=Disponibile | ❌=NonDisponibile";
     }
 }

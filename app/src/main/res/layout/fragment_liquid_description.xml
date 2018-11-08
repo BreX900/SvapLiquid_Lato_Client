@@ -31,6 +31,12 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/availability"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="LeggendaDisponibilità: ✔️=Disponibile | ❌=NonDisponibile" />
+
+            <TextView
                 android:id="@+id/TextView_LiquidDescription_TipologiaTiro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
