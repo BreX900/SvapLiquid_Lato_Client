@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.android.svapliquid.Activity.ILog;
 import com.example.android.svapliquid.Activity.ValoriRicerca;
 import com.example.android.svapliquid.Activity.activity.MainActivity;
+import com.example.android.svapliquid.Activity.activity.SendMessage;
 import com.example.android.svapliquid.Activity.databases.svapliquid_db.RisultatiRicerca;
 import com.example.android.svapliquid.Activity.databases.svapliquid_db.tabel_record.tipoTiro.TipoTiri;
 import com.example.android.svapliquid.Activity.databases.svapliquid_db.tabel_record.tipoTiro.TipoTiro;
@@ -118,30 +119,16 @@ public class ResultLiquidF extends NavigationFragmentWithActionBar<MainActivity>
         switch (item.getItemId()) {
             case R.id.share:
                 new AlertDialog.Builder(activity).setTitle("Condividere Prodotti?").setMessage("Questa opzione permette di condividere i prodotti disponibili. Non modificare il testo in nessun modo, invialo e basta.")
-                        .setPositiveButton("SI", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent whatsappIntent = new Intent(Intent.ACTION_SEND);
-                                whatsappIntent.setType("text/plain");
-                                whatsappIntent.setPackage("com.whatsapp");
-                                whatsappIntent.putExtra(Intent.EXTRA_TEXT, getMessage());
-                                try {
-                                    activity.startActivity(whatsappIntent);
-                                } catch (android.content.ActivityNotFoundException ex) {
-                                    Toast.makeText(activity, "Whatsapp have not been installed.", Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                }).show();
+                        .setPositiveButton("Invia", new SendMessage(0,getMessage(), activity))
+                        .setNeutralButton("Esci", null).show();
                 break;
             default:
                 return super.onOptionsItemSelected(item);
         }
         return true;
     }
+
+
 
     private String getMessage() {
         String message = "I liquidi sono divisi in 3 categorie per tipo di tiro: Guancia, Polmone e Any(Guancia/Polmone).\n";

@@ -2,6 +2,7 @@ package com.example.android.svapliquid.Activity.fragment.user;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -46,5 +47,17 @@ public class AllLiquidF extends ResultLiquidF {
     }
     public static AllLiquidF getInstance() {
         return new AllLiquidF();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.help:
+                new AlertDialog.Builder(activity).setTitle("INFO").setMessage("✔️ = Liquido Disponibile\n❌ = Liquido Non Disponibile").setNeutralButton("OK",null).show();
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        return true;
     }
 }

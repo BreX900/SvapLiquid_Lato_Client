@@ -8,4 +8,11 @@
         android:title="Menu"
         app:showAsAction="always"
         android:icon="@drawable/share_variant"/>
+
+    <item
+        android:id="@+id/help"
+        android:orderInCategory="100"
+        android:title="Menu"
+        app:showAsAction="always"
+        android:icon="@drawable/help"/>
 </menu>

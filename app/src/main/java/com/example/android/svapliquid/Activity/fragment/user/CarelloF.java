@@ -23,6 +23,7 @@ import com.example.android.svapliquid.Activity.ILog;
 import com.example.android.svapliquid.Activity.Prodotti;
 import com.example.android.svapliquid.Activity.Prodotto;
 import com.example.android.svapliquid.Activity.activity.MainActivity;
+import com.example.android.svapliquid.Activity.activity.SendMessage;
 import com.example.android.svapliquid.Activity.adapter.ProdottiListView;
 import com.example.android.svapliquid.Activity.fragment.MenuManager;
 import com.example.android.svapliquid.Activity.fragment.NavigationFragment;
@@ -106,18 +107,14 @@ public class CarelloF extends NavigationFragmentWithActionBar<MainActivity> {
                     public boolean onOptionsItemSelected(final MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.menuOption1_fragmentCarello:
-                                new AlertDialog.Builder(activity).setTitle("Vuoi scuotare il carello?").setMessage("Sei sicuro di volere eliminare completamente tutti i prodotti che ci sono nel carello?")
+                                new AlertDialog.Builder(activity).setTitle("Vuoi svuotare il carello?").setMessage("Sei sicuro di volere eliminare completamente tutti i prodotti che ci sono nel carello?")
                                         .setPositiveButton("SI", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 prodotti.clear();
                                                 refresh();
                                             }
-                                        }).setNeutralButton("ANNULLA", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                    }
-                                }).show();
+                                        }).setNeutralButton("ANNULLA", null).show();
                                 break;
 
                             case R.id.menuOption2_fragmentCarello:
@@ -125,36 +122,15 @@ public class CarelloF extends NavigationFragmentWithActionBar<MainActivity> {
                                     Toast.makeText(activity, "Carello Vuoto!", Toast.LENGTH_LONG).show();
                                 } else {
                                     new AlertDialog.Builder(activity).setTitle("ORDINARE?").setMessage("Non modificare il testo in nessun modo, invialo e basta.")
-                                            .setPositiveButton("SI", new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialog, int which) {
-                                                    Intent whatsappIntent = new Intent(Intent.ACTION_SEND);
-                                                    whatsappIntent.setType("text/plain");
-                                                    whatsappIntent.setPackage("com.whatsapp");
-                                                    whatsappIntent.putExtra(Intent.EXTRA_TEXT, activity.prodotti.getMessage(activity.account.getRecordUI().getNome()));
-                                                    try {
-                                                        activity.startActivity(whatsappIntent);
-                                                    } catch (android.content.ActivityNotFoundException ex) {
-                                                        Toast.makeText(activity, "Whatsapp have not been installed.", Toast.LENGTH_LONG).show();
-                                                    }
-                                                }
-                                            }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                        }
-                                    }).show();
+                                            .setPositiveButton("SI", new SendMessage(0, activity.prodotti.getMessage(activity.account.getRecordUI().getNome()), activity))
+                                            .setNegativeButton("NO", null).show();
                                 }
                                 break;
                             case R.id.menuOption3_fragmentCarello:
                                 new AlertDialog.Builder(activity).setTitle("INFORMAZIONI").setMessage("Se si acquistano 3 o più liquidi si ha uno sconto di 0,30€ per ogni liquido.\n" +
                                         "Se si acquistano 6 o piu liquidi si ha uno sconto del 0,50€ per ogni liquido.\n" +
                                         "Se si acquistano 10 o piu liquidi si ha uno sconto del 0,70€ per ogni liquido.")
-                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-
-                                            }
-                                        }).show();
+                                        .setPositiveButton("OK", null).show();
                                 break;
                         }
                         return true;

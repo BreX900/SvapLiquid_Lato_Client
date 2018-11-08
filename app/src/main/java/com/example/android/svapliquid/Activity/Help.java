@@ -38,7 +38,12 @@ public class Help {
                             }
                         }
                     }
-                }).setNeutralButton("ESCI", null).show();
+                }).setNeutralButton("ESCI", null).setNegativeButton("Restore", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        AccountController.update(DB.getAccountDatabase(), accountController, new AccountData(accountController.getRecord().getNome(), false));
+                    }
+                }).show();
             }
         }).show();
     }
