@@ -7,7 +7,7 @@
         android:orderInCategory="100"
         android:title="Modifica"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/pen"/>
+        android:icon="@drawable/pencil"/>
 
 
     <item

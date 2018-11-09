@@ -7,7 +7,7 @@
         android:orderInCategory="100"
         android:title="Mostra Tutto"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/arrow_up_bold_outline"/>
+        android:icon="@drawable/pencil"/>
 
     <item
         android:id="@+id/menuOption1_prodotto"
