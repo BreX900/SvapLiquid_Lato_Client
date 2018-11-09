@@ -16,6 +16,7 @@ public class OrdineRecordUI extends RecordUI<OrdineRecord> {
     }
 
 
+
     public int getId() {
         return getItem().getId();
     }
@@ -38,5 +39,8 @@ public class OrdineRecordUI extends RecordUI<OrdineRecord> {
 
     public String getDateIt() {
         return getItem().getDate().getDateIt();
+    }
+    public boolean getWarning() {
+        return getItem().getWarning();
     }
 }

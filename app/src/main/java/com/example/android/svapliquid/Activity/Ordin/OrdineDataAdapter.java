@@ -4,24 +4,30 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.svapliquid.Activity.Carelli;
 import com.example.android.svapliquid.Activity.Carello;
+import com.example.android.svapliquid.Activity.ILog;
 import com.example.android.svapliquid.Activity.Ordin.controller.DateController;
 import com.example.android.svapliquid.Activity.Ordin.controller.defaultController.RecordControllers;
 import com.example.android.svapliquid.Activity.Ordin.controller.ordine.OrdiniController;
 import com.example.android.svapliquid.Activity.Ordin.controller.prodotto.ProdottiControllers;
 import com.example.android.svapliquid.Activity.Ordin.data.OrdineData;
+import com.example.android.svapliquid.Activity.Ordin.data.OrdineGUI;
 import com.example.android.svapliquid.Activity.Ordin.data.PrezzoData;
 import com.example.android.svapliquid.Activity.Ordin.data.ProdottiData;
 import com.example.android.svapliquid.Activity.Ordin.data.ProdottoData;
@@ -65,20 +71,25 @@ public class OrdineDataAdapter {
         if (prodotti.isEmpty()) {
             Toast.makeText(activity, "Carello vuoto", Toast.LENGTH_LONG).show();
         } else {
+            final OrdineGUI ordineGUI = new OrdineGUI(ordineData);
             final LayoutInflater inflater = activity.getLayoutInflater();
             final View view = inflater.inflate(R.layout.alert_dialog_add_ordine, null);
-            final EditText editText_nome = (EditText) view.findViewById(R.id.editText_alertDialogAddOrdine_nomeOrdine);
-            editText_nome.setText(ordineData.getNome());
-            final EditText editText_prezzo = (EditText) view.findViewById(R.id.editText_alertDialogAddOrdine_prezzo);
-            editText_prezzo.setText(ordineData.getPrezzo().getPrezzo() + "");
-            final EditText editText_stato = (EditText) view.findViewById(R.id.editText_alertDialogAddOrdine_stato);
-            editText_stato.setText(ordineData.getStato());
-            final EditText editText_informazioni = (EditText) view.findViewById(R.id.editText_alertDialogAddOrdine_informazioni);
-            editText_informazioni.setText(ordineData.getInformazioni());
-            final EditText editText_date = (EditText) view.findViewById(R.id.editText_alertDialogAddOrdine_date);
+            final EditText editText_nome = view.findViewById(R.id.editText_alertDialogAddOrdine_nomeOrdine);
+            editText_nome.setText(ordineGUI.getNome());
+            final EditText editText_prezzo = view.findViewById(R.id.editText_alertDialogAddOrdine_prezzo);
+            editText_prezzo.setText(ordineGUI.getPrezzo());
+            final EditText editText_stato = view.findViewById(R.id.editText_alertDialogAddOrdine_stato);
+            editText_stato.setText(ordineGUI.getStato());
+
+            final EditText editText_informazioni = view.findViewById(R.id.editText_alertDialogAddOrdine_informazioni);
+            editText_informazioni.setText(ordineGUI.getInformazioni());
+
+            final EditText editText_date = view.findViewById(R.id.editText_alertDialogAddOrdine_date);
             if (ordineData.getDate().isSet()) {
-                editText_date.setText(ordineData.getDate().getDateIt());
+                editText_date.setText(ordineGUI.getDate());
             }
+            final Switch switch_warning = view.findViewById(R.id.switch_alertDialogAddOrdine);
+
             editText_date.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
@@ -99,7 +110,13 @@ public class OrdineDataAdapter {
                 public void onClick(final DialogInterface dialog, final int which) {
                     ordineData.setNome(editText_nome.getText().toString());
                     ordineData.getPrezzo().setPrezzo(Double.parseDouble(editText_prezzo.getText().toString()));
-                    ordineData.setStato(editText_stato.getText().toString());
+                    String stato = editText_stato.getText().toString();
+                    if (switch_warning.isChecked()) {
+                        stato = OrdineData.W+stato;
+                    }
+
+                    ordineData.setStato(stato);
+                    Log.i(ILog.LOG_TAG, "BOOOH "+ordineData);
                     ordineData.setInformazioni(editText_informazioni.getText().toString());
                     try {
                         String stringDate = editText_date.getText().toString();
@@ -113,7 +130,7 @@ public class OrdineDataAdapter {
                         dialogAddOrdine(activity, idAccount, ordineData, prodotti, ordiniController);
                     }
                 }
-            }).setNeutralButton("ANNULLA", null).setCancelable(false).show();
+            }).setNeutralButton("ANNULLA", null).setCancelable(false).create().show();
         }
     }
 

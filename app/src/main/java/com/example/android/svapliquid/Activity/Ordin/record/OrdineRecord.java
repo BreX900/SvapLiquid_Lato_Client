@@ -2,6 +2,7 @@ package com.example.android.svapliquid.Activity.Ordin.record;
 
 import com.example.android.svapliquid.Activity.Ordin.data.DateData;
 import com.example.android.svapliquid.Activity.Ordin.data.OrdineData;
+import com.example.android.svapliquid.Activity.Ordin.data.OrdineGUI;
 import com.example.android.svapliquid.Activity.Ordin.data.PrezzoData;
 import com.example.android.svapliquid.Activity.Ordin.index.OrdineKey;
 import com.example.android.svapliquid.Activity.Ordin.record.defaultRecord.Record;
@@ -40,5 +41,17 @@ public class OrdineRecord implements Record {
     }
     public DateData getDate() {
         return this.ordineData.getDate();
+    }
+    public boolean getWarning() {
+        return this.ordineData.getWarning();
+    }
+
+    @Override
+    public String toString() {
+        return this.ordineData.toString();
+    }
+
+    public OrdineData getData() {
+        return ordineData;
     }
 }

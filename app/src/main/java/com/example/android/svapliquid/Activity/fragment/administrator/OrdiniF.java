@@ -1,6 +1,8 @@
 package com.example.android.svapliquid.Activity.fragment.administrator;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
@@ -24,6 +26,8 @@ import com.example.android.svapliquid.Activity.Ordin.UI.recordUI.OrdineRecordUI;
 import com.example.android.svapliquid.Activity.Ordin.controller.defaultController.RecordControllers;
 import com.example.android.svapliquid.Activity.Ordin.controller.ordine.OrdineController;
 import com.example.android.svapliquid.Activity.Ordin.controller.ordine.OrdiniController;
+import com.example.android.svapliquid.Activity.Ordin.data.OrdineData;
+import com.example.android.svapliquid.Activity.Ordin.data.OrdineGUI;
 import com.example.android.svapliquid.Activity.Ordin.index.OrdineKey;
 import com.example.android.svapliquid.Activity.Ordin.index.ProdottoKey;
 import com.example.android.svapliquid.Activity.Ordin.record.OrdineRecord;
@@ -66,7 +70,7 @@ public class OrdiniF extends NavigationFragmentWithActionBar<MainActivity> {
                 .addWhereAnd(OrdineKey.ID_ACCOUNT + "=" + activity.account.getRecord().getId()).addWhereAnd(OrdineKey.NOME_TABELLA + "." + OrdineKey.ID + "=" + ProdottoKey.NOME_TABELLA + "." + ProdottoKey.ID_ORDINE)
                 .addGroup(OrdineKey.NOME_TABELLA + "." + ProdottoKey.ID_ORDINE).addOrderDesc(OrdineKey.DATA).addOrderDesc(OrdineKey.ID);
         this.ordiniController = new OrdiniController(DB.getAccountDatabase(), defaultQuery);
-        ListView listView = (ListView) rootView.findViewById(R.id.listView_fragmentOrdini);
+        ListView listView = rootView.findViewById(R.id.listView_fragmentOrdini);
         ordiniAdapter = new OrdiniUIAdapter(listView, ordiniController, activity);
         RecordControllers.ControllerGuiController.addGui(OrdineKey.NOME_TABELLA, ordiniAdapter);
         ordiniAdapter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -155,7 +159,7 @@ public class OrdiniF extends NavigationFragmentWithActionBar<MainActivity> {
             super(listView, ordiniController);
             this.context = context;
         }
-
+        OrdineGUI ordineGUI;
         @Override
         public View getView(int position, View convertView, ViewGroup parent, boolean selected) {
             ViewHolder viewHolder;
@@ -170,8 +174,7 @@ public class OrdiniF extends NavigationFragmentWithActionBar<MainActivity> {
                 viewHolder.textViewDate = (TextView) convertView.findViewById(R.id.textView_ListViewItemOrdine_date);
                 viewHolder.textViewPrezzoStimato = (TextView) convertView.findViewById(R.id.textView_ListViewItemOrdine_prezzoStimato);
                 convertView.setTag(viewHolder);
-            }
-            else {
+            } else {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
             if (isEmpty()) {
@@ -181,20 +184,18 @@ public class OrdiniF extends NavigationFragmentWithActionBar<MainActivity> {
                 viewHolder.textViewStato.setText(" ");
                 viewHolder.textViewDate.setText(" ");
                 viewHolder.textViewPrezzoStimato.setText("0.00");
-            }
-            else {
-                OrdineRecordUI ordine = getItemRecordUI(position);
-                viewHolder.textViewIdOrdine.setText(ordine.getId()+"");
-                viewHolder.textViewNomeOrdine.setText(ordine.getNome());
-                viewHolder.textViewPrezzoCalcolato.setText(ordine.getPrezzoCalcolato().getPrezzo()+"");
-                viewHolder.textViewStato.setText(ordine.getStato());
-                viewHolder.textViewDate.setText(ordine.getDateIt());
-                viewHolder.textViewPrezzoStimato.setText(Utility.castDecimal(ordine.getPrezzo().getPrezzo(), 2)+"");
+            } else {
+                OrdineRecordUI ordineRecordUI = getItemRecordUI(position);
+                ordineGUI = new OrdineGUI(new OrdineData(ordineRecordUI.getItem()), ordineRecordUI.getPrezzoCalcolato());
+                viewHolder.textViewIdOrdine.setText(position+"");
+                viewHolder.textViewNomeOrdine.setText(ordineGUI.getNome());
+                viewHolder.textViewPrezzoCalcolato.setText(ordineGUI.getPrezzo());
+                viewHolder.textViewStato.setText(ordineGUI.getStato());
+                viewHolder.textViewDate.setText(ordineGUI.getDate());
+                viewHolder.textViewPrezzoStimato.setText(ordineGUI.getPrezzoCalcolato());
             }
             return convertView;
         }
-
-
 
         class ViewHolder {
             TextView textViewIdOrdine;
@@ -203,6 +204,14 @@ public class OrdiniF extends NavigationFragmentWithActionBar<MainActivity> {
             TextView textViewStato;
             TextView textViewDate;
             TextView textViewPrezzoStimato;
+        }
+
+        @Override
+        public int colorAlternativ(boolean selected, int position) {
+            if (ordineGUI.getWarning())
+                if (selected) return 0xffcc8500;//arancione scuro
+                else return 0xffffbc40; //arancione chiaro
+            else return super.colorAlternativ(selected, position);
         }
     }
 }

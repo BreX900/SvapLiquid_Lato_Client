@@ -11,6 +11,7 @@
     <color name="colorBackground">#b9b9b9</color>   <!-- Colore sfondo-->
     <color name="textBackground">#83000000</color>
     <color name="trasparente">#d7f8f9f9</color>
+    <color name="niente">#0000</color>
     <color name="bluTrasparente">#6400c8ff</color>
 
     <color name="giallo">#eddb10 </color>    <!--f7e310 giallo limone-->

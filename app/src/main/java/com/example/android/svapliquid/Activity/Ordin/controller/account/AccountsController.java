@@ -37,7 +37,7 @@ public class AccountsController extends RecordControllers<AccountRecord, Account
 
     public static long create(DB.Database database, AccountData account) {
         ContentValues initialValues = new ContentValues();
-        initialValues.put(AccountKey.ID, database.count(AccountKey.NOME_TABELLA));
+        //initialValues.put(AccountKey.ID, database.count(AccountKey.NOME_TABELLA));
         initialValues.put(AccountKey.NOME, account.getNome());
         initialValues.put(AccountKey.ADMINISTRATOR, account.isAdministrator());
         return database.insert(AccountKey.NOME_TABELLA, null, initialValues);

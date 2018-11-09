@@ -10,7 +10,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
@@ -44,14 +44,30 @@
                 android:layout_height="wrap_content"
                 android:text="STATO ORDINE" />
 
-            <EditText
-                android:id="@+id/editText_alertDialogAddOrdine_stato"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="STATO"
-                android:inputType="textPersonName"
-                android:textAlignment="textStart" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/editText_alertDialogAddOrdine_stato"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="start"
+                    android:layout_toStartOf="@id/switch_alertDialogAddOrdine"
+                    android:layout_alignParentStart="true"
+                    android:ems="10"
+                    android:hint="STATO"
+                    android:inputType="text" />
+
+                <Switch
+                    android:id="@+id/switch_alertDialogAddOrdine"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true" />
+
+            </RelativeLayout>
 
             <TextView
                 android:layout_width="match_parent"

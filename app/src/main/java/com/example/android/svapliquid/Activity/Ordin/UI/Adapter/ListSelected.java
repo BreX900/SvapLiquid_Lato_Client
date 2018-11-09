@@ -69,14 +69,19 @@ public abstract class ListSelected<I extends Object, L extends List<I>> extends 
     public View getView(final int position, final View convertView, final ViewGroup parent) {
         boolean selected = this.isSelected(position);
         View view = this.getView(position, convertView, parent, selected);
-        this.changeViewSelected(view, selected);
+        this.changeViewSelected(view, selected, position);
         return view;
     }
     public abstract View getView(int position, View convertView, ViewGroup parent, boolean selected);
 
-    public void changeViewSelected(View view, boolean selected) {
-        if (selected) view.setBackgroundColor(Color.LTGRAY);
-        else view.setBackgroundColor(Color.TRANSPARENT);
+
+    public int colorAlternativ(boolean selected, int position) {
+        if (selected) return Color.LTGRAY;
+        else return Color.TRANSPARENT;
+    }
+
+    private void changeViewSelected(View view, boolean selected, int position) {
+        view.setBackgroundColor(colorAlternativ(selected, position));
     }
 
     /**@Override
