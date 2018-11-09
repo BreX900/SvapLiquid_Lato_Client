@@ -25,7 +25,6 @@ import android.widget.TextView;
 
 import com.example.android.svapliquid.Activity.ILog;
 import com.example.android.svapliquid.Activity.OnActionListener;
-import com.example.android.svapliquid.Activity.Ordin.index.OrdineKey;
 import com.example.android.svapliquid.Activity.Prodotto;
 import com.example.android.svapliquid.Activity.TextViewPrezzo;
 import com.example.android.svapliquid.Activity.databases.DB;

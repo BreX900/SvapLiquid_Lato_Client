@@ -22,7 +22,6 @@ import com.example.android.svapliquid.Activity.Ordin.controller.defaultControlle
 import com.example.android.svapliquid.Activity.Ordin.controller.defaultController.RecordControllers;
 import com.example.android.svapliquid.Activity.Ordin.controller.prodotto.ProdottiControllers;
 import com.example.android.svapliquid.Activity.Ordin.controller.prodotto.ProdottoController;
-import com.example.android.svapliquid.Activity.Ordin.index.OrdineKey;
 import com.example.android.svapliquid.Activity.Ordin.index.ProdottoKey;
 import com.example.android.svapliquid.Activity.Ordin.record.ProdottoRecord;
 import com.example.android.svapliquid.Activity.TextViewPrezzo;

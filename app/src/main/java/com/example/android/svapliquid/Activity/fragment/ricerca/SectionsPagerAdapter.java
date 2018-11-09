@@ -15,8 +15,8 @@ import com.example.android.svapliquid.Activity.ValoriRicerca;
 import com.example.android.svapliquid.Activity.activity.MainActivity;
 import com.example.android.svapliquid.Activity.databases.svapliquid_db.tabel_record.tipoTiro.TipoTiri;
 import com.example.android.svapliquid.Activity.fragment.Containers.ExpandableListAdapter;
-import com.example.android.svapliquid.Activity.fragment.user.LiquidDescriptionF;
 import com.example.android.svapliquid.Activity.fragment.NavigationFragment;
+import com.example.android.svapliquid.Activity.fragment.user.LiquidDescriptionF;
 import com.example.android.svapliquid.R;
 
 import java.util.HashMap;

@@ -7,9 +7,7 @@ package com.example.android.svapliquid.Activity.fragment;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 
-import com.example.android.svapliquid.Activity.ILog;
 import com.example.android.svapliquid.Activity.activity.NavigationActivity;
 
 /**Da le linee guida per l'implementazione dei vari fragment*/

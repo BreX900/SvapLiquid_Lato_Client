@@ -1,7 +1,6 @@
 package com.example.android.svapliquid.Activity.fragment.user;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
@@ -21,7 +20,6 @@ import android.widget.Toast;
 
 import com.example.android.svapliquid.Activity.ILog;
 import com.example.android.svapliquid.Activity.Prodotti;
-import com.example.android.svapliquid.Activity.Prodotto;
 import com.example.android.svapliquid.Activity.activity.MainActivity;
 import com.example.android.svapliquid.Activity.activity.SendMessage;
 import com.example.android.svapliquid.Activity.adapter.ProdottiListView;
@@ -31,8 +29,6 @@ import com.example.android.svapliquid.Activity.fragment.NavigationFragmentWithAc
 import com.example.android.svapliquid.R;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
 
 /**
  * Created by Andorid on 03/08/2017.

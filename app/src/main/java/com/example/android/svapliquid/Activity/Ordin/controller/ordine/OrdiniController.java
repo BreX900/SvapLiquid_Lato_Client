@@ -1,23 +1,16 @@
 package com.example.android.svapliquid.Activity.Ordin.controller.ordine;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.ArrayMap;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.android.svapliquid.Activity.ILog;
 import com.example.android.svapliquid.Activity.Ordin.UI.recordUI.OrdineRecordUI;
-import com.example.android.svapliquid.Activity.Ordin.controller.DateController;
 import com.example.android.svapliquid.Activity.Ordin.controller.defaultController.RecordControllers;
-import com.example.android.svapliquid.Activity.Ordin.controller.prodotto.ProdottiControllers;
 import com.example.android.svapliquid.Activity.Ordin.data.OrdineData;
 import com.example.android.svapliquid.Activity.Ordin.data.PrezzoData;
 import com.example.android.svapliquid.Activity.Ordin.index.OrdineKey;
@@ -28,7 +21,6 @@ import com.example.android.svapliquid.Activity.databases.DB;
 import com.example.android.svapliquid.Activity.databases.svapliquid_db.tabel_record.Query.QueryString;
 import com.example.android.svapliquid.R;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 
 /**

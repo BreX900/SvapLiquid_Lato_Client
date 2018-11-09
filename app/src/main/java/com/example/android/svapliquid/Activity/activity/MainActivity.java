@@ -11,7 +11,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.example.android.svapliquid.Activity.Help;
 import com.example.android.svapliquid.Activity.ILog;
@@ -19,13 +18,11 @@ import com.example.android.svapliquid.Activity.Memorys;
 import com.example.android.svapliquid.Activity.Ordin.controller.account.AccountController;
 import com.example.android.svapliquid.Activity.Prodotti;
 import com.example.android.svapliquid.Activity.databases.DB;
-import com.example.android.svapliquid.Activity.databases.account_db.GestioneAccountDB;
-import com.example.android.svapliquid.Activity.databases.svapliquid_db.GestioneSvapLiquiDB;
-import com.example.android.svapliquid.Activity.fragment.user.CarelloF;
-import com.example.android.svapliquid.Activity.fragment.user.AllLiquidF;
-import com.example.android.svapliquid.Activity.fragment.user.MainActivityF;
 import com.example.android.svapliquid.Activity.fragment.administrator.OrdiniF;
 import com.example.android.svapliquid.Activity.fragment.ricerca.SubMainF;
+import com.example.android.svapliquid.Activity.fragment.user.AllLiquidF;
+import com.example.android.svapliquid.Activity.fragment.user.CarelloF;
+import com.example.android.svapliquid.Activity.fragment.user.MainActivityF;
 import com.example.android.svapliquid.R;
 
 import java.io.IOException;

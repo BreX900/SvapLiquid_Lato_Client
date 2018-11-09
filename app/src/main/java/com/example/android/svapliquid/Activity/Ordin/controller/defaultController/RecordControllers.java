@@ -1,11 +1,8 @@
 package com.example.android.svapliquid.Activity.Ordin.controller.defaultController;
 
 import android.util.ArrayMap;
-import android.util.Log;
 
-import com.example.android.svapliquid.Activity.ILog;
 import com.example.android.svapliquid.Activity.Ordin.UI.recordUI.defaultRecordUI.RecordUI;
-import com.example.android.svapliquid.Activity.Ordin.index.OrdineKey;
 import com.example.android.svapliquid.Activity.Ordin.record.defaultRecord.Record;
 import com.example.android.svapliquid.Activity.databases.CursorS;
 import com.example.android.svapliquid.Activity.databases.DB;

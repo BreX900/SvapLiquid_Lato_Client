@@ -1,7 +1,7 @@
 package com.example.android.svapliquid.Activity.Ordin.UI.recordUI.defaultRecordUI;
 
-import com.example.android.svapliquid.Activity.Ordin.record.defaultRecord.Record;
 import com.example.android.svapliquid.Activity.Ordin.UI.dafaultUI.ObjectUICollection;
+import com.example.android.svapliquid.Activity.Ordin.record.defaultRecord.Record;
 
 import java.util.ArrayList;
 

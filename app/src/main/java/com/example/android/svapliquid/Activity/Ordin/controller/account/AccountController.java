@@ -13,7 +13,6 @@ import android.widget.Toast;
 import com.example.android.svapliquid.Activity.ILog;
 import com.example.android.svapliquid.Activity.Ordin.UI.recordUI.AccountRecordUI;
 import com.example.android.svapliquid.Activity.Ordin.controller.defaultController.RecordController;
-import com.example.android.svapliquid.Activity.Ordin.controller.defaultController.RecordControllers;
 import com.example.android.svapliquid.Activity.Ordin.data.AccountData;
 import com.example.android.svapliquid.Activity.Ordin.index.AccountKey;
 import com.example.android.svapliquid.Activity.Ordin.record.AccountRecord;
@@ -24,8 +23,6 @@ import com.example.android.svapliquid.Activity.fragment.ricerca.SubMainF;
 import com.example.android.svapliquid.R;
 
 import org.jetbrains.annotations.NotNull;
-
-import static android.widget.AdapterView.INVALID_POSITION;
 
 /**
  * Created by Andorid on 13/11/2017.

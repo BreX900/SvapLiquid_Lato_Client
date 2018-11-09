@@ -1,7 +1,5 @@
 package com.example.android.svapliquid.Activity.fragment.ricerca;
 
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -15,7 +13,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.android.svapliquid.Activity.ILog;
 import com.example.android.svapliquid.Activity.ValoriRicerca;
@@ -24,7 +21,6 @@ import com.example.android.svapliquid.Activity.activity.SendMessage;
 import com.example.android.svapliquid.Activity.databases.svapliquid_db.RisultatiRicerca;
 import com.example.android.svapliquid.Activity.databases.svapliquid_db.tabel_record.tipoTiro.TipoTiri;
 import com.example.android.svapliquid.Activity.databases.svapliquid_db.tabel_record.tipoTiro.TipoTiro;
-import com.example.android.svapliquid.Activity.fragment.Containers.Gruppo;
 import com.example.android.svapliquid.Activity.fragment.Containers.IdString;
 import com.example.android.svapliquid.Activity.fragment.IBackOn;
 import com.example.android.svapliquid.Activity.fragment.NavigationFragmentWithActionBar;

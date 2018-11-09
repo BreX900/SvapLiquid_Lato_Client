@@ -3,10 +3,7 @@ package com.example.android.svapliquid.Activity.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.Toast;
-
-import com.example.android.svapliquid.Activity.ILog;
 
 public class SendMessage implements DialogInterface.OnClickListener {
     final int app, WhatsApp=0, Telegram=1, TelegramX=2;

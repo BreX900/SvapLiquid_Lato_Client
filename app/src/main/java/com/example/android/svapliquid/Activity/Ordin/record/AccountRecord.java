@@ -2,7 +2,6 @@ package com.example.android.svapliquid.Activity.Ordin.record;
 
 import com.example.android.svapliquid.Activity.Ordin.data.AccountData;
 import com.example.android.svapliquid.Activity.Ordin.index.AccountKey;
-import com.example.android.svapliquid.Activity.Ordin.index.OrdineKey;
 import com.example.android.svapliquid.Activity.Ordin.record.defaultRecord.Record;
 import com.example.android.svapliquid.Activity.databases.CursorS;
 

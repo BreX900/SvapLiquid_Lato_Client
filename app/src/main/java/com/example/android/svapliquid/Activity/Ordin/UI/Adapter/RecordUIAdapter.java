@@ -1,9 +1,7 @@
 package com.example.android.svapliquid.Activity.Ordin.UI.Adapter;
 
-import android.util.Log;
 import android.widget.ListView;
 
-import com.example.android.svapliquid.Activity.ILog;
 import com.example.android.svapliquid.Activity.Ordin.UI.recordUI.defaultRecordUI.RecordUI;
 import com.example.android.svapliquid.Activity.Ordin.controller.defaultController.NotifyDataSetChanged;
 import com.example.android.svapliquid.Activity.Ordin.controller.defaultController.RecordController;

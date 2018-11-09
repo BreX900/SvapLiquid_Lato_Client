@@ -6,7 +6,6 @@ import android.util.Log;
 import com.example.android.svapliquid.Activity.ILog;
 import com.example.android.svapliquid.Activity.Ordin.UI.recordUI.ProdottoRecordUI;
 import com.example.android.svapliquid.Activity.Ordin.controller.defaultController.RecordControllers;
-import com.example.android.svapliquid.Activity.Ordin.controller.ordine.OrdineController;
 import com.example.android.svapliquid.Activity.Ordin.controller.ordine.OrdiniController;
 import com.example.android.svapliquid.Activity.Ordin.data.PrezzoData;
 import com.example.android.svapliquid.Activity.Ordin.data.ProdottiData;

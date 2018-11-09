@@ -1,6 +1,6 @@
 package com.example.android.svapliquid.Activity.fragment.Containers;
 
-import com.example.android.svapliquid.Activity.databases.svapliquid_db.*;
+import com.example.android.svapliquid.Activity.databases.svapliquid_db.RisultatiRicerca;
 import com.example.android.svapliquid.Activity.databases.svapliquid_db.tabel_record.liquido.Liquidi;
 
 import java.util.ArrayList;

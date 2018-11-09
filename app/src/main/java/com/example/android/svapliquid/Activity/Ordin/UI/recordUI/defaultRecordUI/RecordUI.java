@@ -1,7 +1,7 @@
 package com.example.android.svapliquid.Activity.Ordin.UI.recordUI.defaultRecordUI;
 
-import com.example.android.svapliquid.Activity.Ordin.record.defaultRecord.Record;
 import com.example.android.svapliquid.Activity.Ordin.UI.dafaultUI.ObjectUI;
+import com.example.android.svapliquid.Activity.Ordin.record.defaultRecord.Record;
 
 /**
  * Created by Andorid on 09/11/2017.
