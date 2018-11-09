@@ -56,6 +56,7 @@ public class OrdiniController extends RecordControllers<OrdineRecord, OrdineReco
     }
     public static int create(DB.Database database, OrdineData ordine, int idAccount) {
         ContentValues initialValues = new ContentValues();
+        initialValues.put(OrdineKey.ID, database.count(OrdineKey.NOME_TABELLA)+1);
         initialValues.put(OrdineKey.INFORMAZIONI, ordine.getInformazioni());
         initialValues.put(OrdineKey.NOME, ordine.getNome());
         initialValues.put(OrdineKey.PREZZO, ordine.getPrezzo().getPrezzo());

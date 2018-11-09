@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.android.svapliquid.Activity.Carelli;
 import com.example.android.svapliquid.Activity.ILog;
 import com.example.android.svapliquid.Activity.Ordin.OrdineDataAdapter;
 import com.example.android.svapliquid.Activity.Ordin.UI.Adapter.RecordUIAdapter;
@@ -63,7 +64,7 @@ public class OrdiniF extends NavigationFragmentWithActionBar<MainActivity> {
         this.defaultQuery = new QueryString().addSelect(OrdineKey.NOME_TABELLA + ".*").addSelect("SUM(" + ProdottoKey.PREZZO + ") AS " + OrdineController.KEY_PREZZO_CALCOLATO)
                 .addFrom(OrdineKey.NOME_TABELLA).addFrom(ProdottoKey.NOME_TABELLA)
                 .addWhereAnd(OrdineKey.ID_ACCOUNT + "=" + activity.account.getRecord().getId()).addWhereAnd(OrdineKey.NOME_TABELLA + "." + OrdineKey.ID + "=" + ProdottoKey.NOME_TABELLA + "." + ProdottoKey.ID_ORDINE)
-                .addGroup(OrdineKey.NOME_TABELLA + "." + ProdottoKey.ID_ORDINE).addOrderDesc(OrdineKey.DATA);
+                .addGroup(OrdineKey.NOME_TABELLA + "." + ProdottoKey.ID_ORDINE).addOrderDesc(OrdineKey.DATA).addOrderDesc(OrdineKey.ID);
         this.ordiniController = new OrdiniController(DB.getAccountDatabase(), defaultQuery);
         ListView listView = (ListView) rootView.findViewById(R.id.listView_fragmentOrdini);
         ordiniAdapter = new OrdiniUIAdapter(listView, ordiniController, activity);
@@ -99,7 +100,7 @@ public class OrdiniF extends NavigationFragmentWithActionBar<MainActivity> {
             public boolean onOptionsItemSelected(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.menuOption1_fragmentOrdine:
-                        OrdineDataAdapter.dialogAddOrdine(activity, activity.account.getRecord().getId(), activity.prodotti, ordiniController);
+                        OrdineDataAdapter.dialogAddOrdine(activity, activity.account.getRecord().getId(), new Carelli(), ordiniController);
                         break;
 
                     case R.id.showAll:

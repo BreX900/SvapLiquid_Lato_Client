@@ -22,9 +22,16 @@ public class OrdineData {
     public OrdineData() {
         this("", new PrezzoData(), "", "");
     }
+    public OrdineData(@NotNull String nome, @NotNull double prezzo) {
+        this(nome, new PrezzoData(prezzo), "", "");
+    }
 
     public OrdineData(@NotNull String nome, @NotNull PrezzoData prezzo, @NotNull String stato, @NotNull String informazioni) {
         this(nome, prezzo, stato, informazioni, new DateData());
+    }
+
+    public OrdineData(double prezzo) {
+        this("", new PrezzoData(prezzo), "", "");
     }
 
     public void setNome(String nome) {

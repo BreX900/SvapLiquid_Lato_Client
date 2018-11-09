@@ -3,6 +3,7 @@ package com.example.android.svapliquid.Activity.databases;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -114,6 +115,9 @@ public class DB {
         }
         public void update(String table, ContentValues values, String whereClause) {
             getDatabase().update(table, values, whereClause, null);
+        }
+        public long count(String table) {
+            return DatabaseUtils.queryNumEntries(getDatabase(), table);
         }
     }
 }

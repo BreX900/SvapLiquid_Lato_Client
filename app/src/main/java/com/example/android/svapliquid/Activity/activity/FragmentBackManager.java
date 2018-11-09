@@ -40,7 +40,9 @@ public class FragmentBackManager {
         this.fragmentManager = navigationActivity.getSupportFragmentManager();
     }
 
+    public void onFragmentOpened(NavigationFragment frag) {
 
+    }
     public void onFragmentOpenedToBackStack(NavigationFragment frag) {
         boolean isAddBackStack = true;
         final String tagFragment = frag.getTagF();
