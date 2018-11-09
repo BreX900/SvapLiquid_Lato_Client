@@ -46,7 +46,7 @@ public class ProdottiControllers extends RecordControllers<ProdottoRecord, Prodo
 
     public static boolean create(DB.Database database, String nome, String composizione, double nicotina, String nomeBoccetta, int ml, PrezzoData prezzo, int idOrdine) {
         ContentValues initialValues = new ContentValues();
-        //initialValues.put(ProdottoKey.ID, database.count(ProdottoKey.NOME_TABELLA)+1);
+        initialValues.put(ProdottoKey.ID, database.count(ProdottoKey.NOME_TABELLA)+1);
         initialValues.put(ProdottoKey.NOME_PRODOTTO, nome);
         initialValues.put(ProdottoKey.COMPOSIZIONE, composizione);
         initialValues.put(ProdottoKey.NICOTINA, nicotina);
