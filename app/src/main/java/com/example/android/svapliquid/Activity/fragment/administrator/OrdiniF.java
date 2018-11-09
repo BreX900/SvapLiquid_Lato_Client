@@ -1,11 +1,11 @@
 package com.example.android.svapliquid.Activity.fragment.administrator;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,7 +31,6 @@ import com.example.android.svapliquid.Activity.Ordin.data.OrdineGUI;
 import com.example.android.svapliquid.Activity.Ordin.index.OrdineKey;
 import com.example.android.svapliquid.Activity.Ordin.index.ProdottoKey;
 import com.example.android.svapliquid.Activity.Ordin.record.OrdineRecord;
-import com.example.android.svapliquid.Activity.Utility;
 import com.example.android.svapliquid.Activity.activity.MainActivity;
 import com.example.android.svapliquid.Activity.databases.DB;
 import com.example.android.svapliquid.Activity.databases.svapliquid_db.tabel_record.Query.QueryString;
@@ -40,6 +39,8 @@ import com.example.android.svapliquid.Activity.fragment.NavigationFragmentWithAc
 import com.example.android.svapliquid.R;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
 
 /**
  * Created by Andorid on 04/08/2017.
@@ -122,8 +123,14 @@ public class OrdiniF extends NavigationFragmentWithActionBar<MainActivity> {
             public boolean onOptionsItemSelected(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.delete_layoutList:
-                        ordiniController.delete(ordiniAdapter.getItemsSelected());
-                        RecordControllers.ControllerGuiController.refresh(OrdineKey.NOME_TABELLA);
+                        final ArrayList<OrdineController> ordini = ordiniAdapter.getItemsSelected();
+                        new AlertDialog.Builder(activity).setTitle("Sei sicuro di voler CANCELLARE per sempre "+ordini.size()+" ordini?").setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                ordiniController.delete(ordini);
+                                RecordControllers.ControllerGuiController.refresh(OrdineKey.NOME_TABELLA);
+                            }
+                        }).setNegativeButton("NO", null).show();
                         break;
                     case R.id.modify:
                         ordiniController.update(ordiniAdapter.getItemsSelected(), activity, activity.account.getRecord().getId());
